@@ -4,9 +4,9 @@ import {
     INodeProperties,
 } from 'n8n-workflow';
 
-export class Waha implements ICredentialType {
-    name = 'waha';
-    displayName = 'Waha';
+export class WahaApi implements ICredentialType {
+    name = 'wahaApi';
+    displayName = 'Waha API';
     properties: INodeProperties[] = [
         {
             displayName: 'Host URL',
@@ -18,7 +18,15 @@ export class Waha implements ICredentialType {
             displayName: 'API Key',
             name: 'apiKey',
             type: 'string',
+            typeOptions: { password: true },
             default: '',
+        },
+        {
+            displayName: 'Session',
+            name: 'session',
+            type: 'string',
+            typeOptions: { password: true },
+            default: 'default',
         },
     ];
 
@@ -32,7 +40,7 @@ export class Waha implements ICredentialType {
     };
     test: ICredentialTestRequest = {
         request: {
-            baseURL: '{{$credentials.url}}/api',
+            baseURL: '={{$credentials.url}}/api',
             url: '/sessions',
         },
     };
