@@ -20,6 +20,7 @@ export class WAHAApi implements ICredentialType {
             type: 'string',
             typeOptions: { password: true },
             default: '',
+						required: false,
         },
         {
             displayName: 'Session',
@@ -27,6 +28,7 @@ export class WAHAApi implements ICredentialType {
             type: 'string',
             typeOptions: { password: true },
             default: 'default',
+						required: false,
         },
     ];
 
