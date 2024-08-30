@@ -1,4 +1,3 @@
-
 import { IExecuteFunctions } from 'n8n-core';
 import {
     IBinaryData,
@@ -9,9 +8,8 @@ import {
 } from 'n8n-workflow';
 import { OptionsWithUri } from 'request';
 
-export class Waha implements INodeType {
+export class WAHANode implements INodeType {
     description: INodeTypeDescription = {
-        // Basic node details will go here
         properties: [
             {
                 displayName: 'Resource',
@@ -158,12 +156,12 @@ export class Waha implements INodeType {
         ],
         version: 2,
         defaults: {
-            name: 'Waha',
+            name: 'WAHA',
         },
         inputs: ['main'],
         outputs: ['main'],
-        displayName: 'Waha',
-        name: 'Waha',
+        displayName: 'WAHA',
+        name: 'WAHANode',
         icon: 'file:waha.svg',
         group: ['whatsapp'],
         description: 'Connect with Whatsapp HTTP API',

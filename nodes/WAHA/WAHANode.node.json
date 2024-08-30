@@ -1,17 +1,17 @@
 {
-	"node": "n8n-nodes-waha.Waha",
+	"node": "n8n-nodes-waha.WAHA",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Whatsapp"],
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": ""
+				"url": "https://waha.devlike.pro/docs/how-to/security/"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": ""
+				"url": "https://waha.devlike.pro/docs"
 			}
 		]
 	}

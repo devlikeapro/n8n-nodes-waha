@@ -4,15 +4,15 @@ import {
     INodeProperties,
 } from 'n8n-workflow';
 
-export class WahaApi implements ICredentialType {
+export class WAHAApi implements ICredentialType {
     name = 'wahaApi';
-    displayName = 'Waha API';
+    displayName = 'WAHA API';
     properties: INodeProperties[] = [
         {
             displayName: 'Host URL',
             name: 'url',
             type: 'string',
-            default: '',
+            default: 'http://localhost:3000',
         },
         {
             displayName: 'API Key',
@@ -44,5 +44,4 @@ export class WahaApi implements ICredentialType {
             url: '/sessions',
         },
     };
-
 }
