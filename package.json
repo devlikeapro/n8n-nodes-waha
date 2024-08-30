@@ -1,7 +1,7 @@
 {
 	"name": "n8n-nodes-waha",
-	"version": "0.1.1",
-	"description": "n8n to connect with Waha Whatsapp API",
+	"version": "0.2.0",
+	"description": "n8n to connect with WAHA (Whatsapp HTTP API)",
 	"keywords": [
 		"n8n-community-node-package"
 	],
