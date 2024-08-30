@@ -158,6 +158,7 @@ export class WAHANode implements INodeType {
         defaults: {
             name: 'WAHA',
         },
+				subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
         inputs: ['main'],
         outputs: ['main'],
         displayName: 'WAHA',
