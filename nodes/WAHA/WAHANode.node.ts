@@ -151,7 +151,7 @@ export class WAHANode implements INodeType {
                     },
                 },
                 default: '',
-                placeholder: 'https://n8n.gms.church/xxxxxxxxx',
+                placeholder: 'https://webhook.site/',
             },
         ],
         version: 2,
