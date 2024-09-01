@@ -114,26 +114,31 @@ export class Parser {
 	private parseParam(parameter: any, resourceName: string, operationName: string) {
 		const name = parameter.name;
 		let schemaType = parameter.schema.type;
-		if (!schemaType && parameter.schema['$ref']){
-			schemaType = "json"
+		if (!schemaType) {
+			if (parameter.schema['$ref'] && parameter.schema['oneOf']) {
+				schemaType = 'json';
+			}
 		}
 
-
 		let type: NodePropertyTypes;
+		let defaultValue = parameter.schema.default || parameter.schema.example;
 		switch (schemaType) {
 			case 'boolean':
 				type = 'boolean';
+				defaultValue = defaultValue !== undefined ? defaultValue : true;
 				break;
 			case 'string':
 			case undefined:
-			case "object":
 				type = 'string';
-				break
-			case "json":
+				defaultValue = defaultValue !== undefined ? defaultValue : 'string';
+				break;
+			case 'object':
+			case 'json':
 				type = 'json';
+				defaultValue = defaultValue !== undefined ? defaultValue : '{}';
 				break;
 			default:
-				throw new Error(`Type ${schemaType} not supported - ${name}`);
+				throw new Error(`Type '${schemaType}' not supported - '${name}'`);
 		}
 
 		const field: INodeProperties = {
@@ -147,7 +152,7 @@ export class Parser {
 					operation: [operationName],
 				},
 			},
-			default: parameter.schema.default || parameter.schema.example || true,
+			default: defaultValue,
 			// eslint-disable-next-line n8n-nodes-base/node-param-description-boolean-without-whether
 			description: parameter.description || parameter.schema.description,
 		};
