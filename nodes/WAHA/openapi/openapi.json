@@ -876,7 +876,8 @@
     "/api/sendPoll": {
       "post": {
         "operationId": "ChattingController_sendPoll",
-        "summary": "Send a poll with options. You can use it as buttons replace",
+        "summary": "Send a poll with options",
+        "description": "You can use it as buttons or list replacement",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -971,7 +972,8 @@
     "/api/sendImage": {
       "post": {
         "operationId": "ChattingController_sendImage",
-        "summary": "Send an image. Either from an URL or base64 data - look at the request schemas for details.",
+        "summary": "Send an image",
+        "description": "Either from an URL or base64 data - look at the request schemas for details.",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -1008,7 +1010,8 @@
     "/api/sendFile": {
       "post": {
         "operationId": "ChattingController_sendFile",
-        "summary": "Send a file. Either from an URL or base64 data - look at the request schemas for details.",
+        "summary": "Send a file",
+        "description": "Either from an URL or base64 data - look at the request schemas for details.",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -1045,7 +1048,8 @@
     "/api/sendVoice": {
       "post": {
         "operationId": "ChattingController_sendVoice",
-        "summary": "Send an voice message. Either from an URL or base64 data - look at the request schemas for details.",
+        "summary": "Send an voice message",
+        "description": "Either from an URL or base64 data - look at the request schemas for details.",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -4045,7 +4049,7 @@
   "info": {
     "title": "WAHA - WhatsApp HTTP API",
     "description": "WhatsApp HTTP API that you can run in a click!<br/><br/>Learn more:<ul><li><a href=\"https://waha.devlike.pro/\" target=\"_blank\">Documentation</a></li><li><a href=\"https://waha.devlike.pro/docs/how-to/engines/#features\" target=\"_blank\">Supported features in engines</a></li><li><a href=\"https://github.com/devlikeapro/waha\" target=\"_blank\">GitHub - WAHA Core</a></li><li><a href=\"https://github.com/devlikeapro/waha-plus\" target=\"_blank\">GitHub - WAHA Plus</a></li><li><a href=\"/dashboard\">WAHA Dashboard</a></li><li><a href=\"https://waha.devlike.pro/docs/how-to/waha-dashboard\">WAHA Dashboard Documentation</a></li></ul><p>Support the project and get WAHA Plus version!</p><ul><li><a href=\"https://waha.devlike.pro/docs/how-to/plus-version/\" target=\"_blank\">WAHA Plus</a></li><li><a href=\"https://patreon.com/wa_http_api/\" target=\"_blank\">Patreon</a></li><li><a href=\"https://boosty.to/wa-http-api/\" target=\"_blank\">Boosty</a></li><li><a href=\"https://portal.devlike.pro/\" target=\"_blank\">Patron Portal</a></li></ul>",
-    "version": "2024.9.1",
+    "version": "2024.9.2",
     "contact": {}
   },
   "tags": [
@@ -4599,7 +4603,7 @@
             }
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -4622,11 +4626,11 @@
             "example": null
           },
           "text": {
-            "type": "object",
+            "type": "string",
             "default": "Hi there!"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -4882,7 +4886,7 @@
             "$ref": "#/components/schemas/MessagePoll"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -4917,7 +4921,7 @@
             "example": null
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -4943,7 +4947,7 @@
             "type": "string"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -5027,7 +5031,7 @@
             "type": "string"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -5064,7 +5068,7 @@
             "type": "string"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -5141,7 +5145,7 @@
             "example": null
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -5227,7 +5231,7 @@
             "default": "Just watch at this!"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -5257,7 +5261,7 @@
             "description": "NOWEB engine only - the ID of the user that sent the  message (undefined for individual chats)"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -5274,7 +5278,7 @@
             "example": "11111111111@c.us"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -5296,7 +5300,7 @@
             "example": "👍"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -5321,7 +5325,7 @@
             "type": "boolean"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -5345,11 +5349,11 @@
             "example": null
           },
           "text": {
-            "type": "object",
+            "type": "string",
             "default": "Hi there!"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },
@@ -5363,7 +5367,7 @@
         "type": "object",
         "properties": {
           "text": {
-            "type": "object",
+            "type": "string",
             "default": "Hello, world!"
           }
         },
@@ -5669,7 +5673,7 @@
             "type": "string"
           },
           "session": {
-            "type": "object",
+            "type": "string",
             "default": "default"
           }
         },

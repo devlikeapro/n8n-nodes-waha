@@ -17,3 +17,6 @@ dev:
 
 clean:
 	rm -rf ./dist
+
+up-swagger:
+	wget -qO- http://localhost:3000/-json | jq '.' > ./nodes/WAHA/openapi/openapi.json
