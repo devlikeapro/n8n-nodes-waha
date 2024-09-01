@@ -13,9 +13,9 @@ export const SessionOperations: INodeProperties[] = [
 		},
 		options: [
 			{
-				name: '📜 List',
+				name: 'List',
 				value: 'list',
-				action: '📜 List sessions',
+				action: 'List sessions',
 				description: 'List all sessions',
 				routing: {
 					request: {
@@ -25,13 +25,90 @@ export const SessionOperations: INodeProperties[] = [
 				},
 			},
 			{
-				name: '📖 Get',
-				action: '📖 Get a session',
+				name: 'Get',
+				action: 'Get a session',
 				value: 'get',
-				description: 'Get a session by name',
+				description: 'Get a session',
 				routing: {
 					request: {
 						method: 'GET',
+						url: '=/api/sessions/{{$parameter["sessionName"]}}',
+					},
+				},
+			},
+			{
+				name: 'Create',
+				action: 'Create a session',
+				value: 'create',
+				description: 'Create a session',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '/api/sessions',
+						body: {
+							name: '{{$parameter["sessionName"]}}',
+							config: '{{$parameter["sessionConfig"]}}',
+						},
+					},
+				},
+			},
+			{
+				name: 'Delete',
+				action: 'Delete a session',
+				value: 'delete',
+				description: 'Delete a session',
+				routing: {
+					request: {
+						method: 'DELETE',
+						url: '=/api/sessions/{{$parameter["sessionName"]}}',
+					},
+				},
+			},
+			{
+				name: 'Start',
+				action: 'Start a session',
+				value: 'start',
+				description: 'Start a session',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/api/sessions/{{$parameter["sessionName"]}}/start',
+					},
+				},
+			},
+			{
+				name: 'Stop',
+				action: 'Stop a session',
+				value: 'stop',
+				description: 'Stop a session',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/api/sessions/{{$parameter["sessionName"]}}/stop',
+					},
+				},
+			},
+			{
+				name: 'Logout',
+				action: 'Logout a session',
+				value: 'logout',
+				description: 'Logout a session',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/api/sessions/{{$parameter["sessionName"]}}/logout',
+					},
+				},
+			},
+			{
+				name: 'Restart',
+				action: 'Restart a session',
+				value: 'restart',
+				description: 'Restart a session',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/api/sessions/{{$parameter["sessionName"]}}/restart',
 					},
 				},
 			},
@@ -52,7 +129,8 @@ export const SessionFields: INodeProperties[] = [
 			},
 		},
 		default: true,
-		description: 'Whether to return all sessions (including STOPPED) or only the ones that are active',
+		description:
+			'Whether to return all sessions (including STOPPED) or only the ones that are active',
 		routing: {
 			request: {
 				qs: {
@@ -63,7 +141,7 @@ export const SessionFields: INodeProperties[] = [
 	},
 	{
 		displayName: 'Session Name',
-		name: 'name',
+		name: 'sessionName',
 		type: 'string',
 		displayOptions: {
 			show: {
@@ -71,11 +149,6 @@ export const SessionFields: INodeProperties[] = [
 				operation: ['get'],
 			},
 		},
-		default: "default",
-		routing: {
-			request: {
-				url: '=/api/sessions/{{$value}}',
-			},
-		},
+		default: 'default',
 	},
 ];
