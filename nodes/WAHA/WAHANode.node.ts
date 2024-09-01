@@ -1,5 +1,8 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import {SessionFields, SessionOperations} from './SessionDescription';
+import {AuthFields, AuthOperations} from "./AuthDescription";
+import {ChattingFields, ChattingOperations} from "./ChattingDescription";
+import {ScreenshotFields, ScreenshotOperations} from "./ScreenshotDescription";
 
 export class WAHANode implements INodeType {
 	description: INodeTypeDescription = {
@@ -39,11 +42,29 @@ export class WAHANode implements INodeType {
 						name: '🖥️ Session',
 						value: 'session',
 					},
+					{
+						name: '🔑 Auth',
+						value: 'auth',
+					},
+					{
+						name: '🖼️ Screenshot',
+						value: 'screenshot',
+					},
+					{
+						name: '📤 Chatting',
+						value: 'chatting',
+					}
 				],
-				default: 'session',
+				default: 'chatting',
 			},
 			...SessionOperations,
 			...SessionFields,
+			...AuthOperations,
+			...AuthFields,
+			...ScreenshotOperations,
+			...ScreenshotFields,
+			...ChattingOperations,
+			...ChattingFields,
 		],
 	};
 }
