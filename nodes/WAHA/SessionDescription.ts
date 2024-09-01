@@ -8,13 +8,13 @@ export const SessionOperations: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
-				resource: ['session'],
+				resource: ['Session'],
 			},
 		},
 		options: [
 			{
 				name: 'List',
-				value: 'list',
+				value: 'List',
 				action: 'List sessions',
 				description: 'List all sessions',
 				routing: {
@@ -27,7 +27,7 @@ export const SessionOperations: INodeProperties[] = [
 			{
 				name: 'Get',
 				action: 'Get a session',
-				value: 'get',
+				value: 'Get',
 				description: 'Get a session',
 				routing: {
 					request: {
@@ -39,7 +39,7 @@ export const SessionOperations: INodeProperties[] = [
 			{
 				name: 'Create',
 				action: 'Create a session',
-				value: 'create',
+				value: 'Create',
 				description: 'Create a session',
 				routing: {
 					request: {
@@ -55,7 +55,7 @@ export const SessionOperations: INodeProperties[] = [
 			{
 				name: 'Update',
 				action: 'Update a session',
-				value: 'update',
+				value: 'Update',
 				description: 'Update a session',
 				routing: {
 					request: {
@@ -70,7 +70,7 @@ export const SessionOperations: INodeProperties[] = [
 			{
 				name: 'Delete',
 				action: 'Delete a session',
-				value: 'delete',
+				value: 'Delete',
 				description: 'Delete a session',
 				routing: {
 					request: {
@@ -82,7 +82,7 @@ export const SessionOperations: INodeProperties[] = [
 			{
 				name: 'Start',
 				action: 'Start a session',
-				value: 'start',
+				value: 'Start',
 				description: 'Start a session',
 				routing: {
 					request: {
@@ -94,7 +94,7 @@ export const SessionOperations: INodeProperties[] = [
 			{
 				name: 'Stop',
 				action: 'Stop a session',
-				value: 'stop',
+				value: 'Stop',
 				description: 'Stop a session',
 				routing: {
 					request: {
@@ -106,7 +106,7 @@ export const SessionOperations: INodeProperties[] = [
 			{
 				name: 'Logout',
 				action: 'Logout a session',
-				value: 'logout',
+				value: 'Logout',
 				description: 'Logout a session',
 				routing: {
 					request: {
@@ -118,7 +118,7 @@ export const SessionOperations: INodeProperties[] = [
 			{
 				name: 'Restart',
 				action: 'Restart a session',
-				value: 'restart',
+				value: 'Restart',
 				description: 'Restart a session',
 				routing: {
 					request: {
@@ -128,7 +128,7 @@ export const SessionOperations: INodeProperties[] = [
 				},
 			},
 		],
-		default: 'list',
+		default: 'List',
 	},
 ];
 
@@ -158,8 +158,8 @@ export const SessionFields: INodeProperties[] = [
 		type: 'boolean',
 		displayOptions: {
 			show: {
-				resource: ['session'],
-				operation: ['list'],
+				resource: ['Session'],
+				operation: ['List'],
 			},
 		},
 		default: true,
@@ -179,8 +179,8 @@ export const SessionFields: INodeProperties[] = [
 		type: 'string',
 		displayOptions: {
 			show: {
-				resource: ['session'],
-				operation: ['get', 'create', 'update', 'delete', 'start', 'stop', 'logout', 'restart'],
+				resource: ['Session'],
+				operation: ['Get', 'Create', 'Update', 'Delete', 'Start', 'Stop', 'Logout', 'Restart'],
 			},
 		},
 		default: 'default',
@@ -192,19 +192,19 @@ export const SessionFields: INodeProperties[] = [
 		default: JSON.stringify(sessionConfigDefault, null, 2),
 		displayOptions: {
 			show: {
-				resource: ['session'],
-				operation: ['create', 'update'],
+				resource: ['Session'],
+				operation: ['Create', 'Update'],
 			},
 		},
 	},
 	{
 		displayName: 'Start Session',
-		name: 'start',
+		name: 'Start',
 		type: 'boolean',
 		displayOptions: {
 			show: {
-				resource: ['session'],
-				operation: ['create'],
+				resource: ['Session'],
+				operation: ['Create'],
 			},
 		},
 		default: true,

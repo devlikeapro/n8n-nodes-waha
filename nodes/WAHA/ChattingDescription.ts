@@ -8,13 +8,13 @@ export const ChattingOperations: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
-				resource: ['chatting'],
+				resource: ['Chatting'],
 			},
 		},
 		options: [
 			{
 				name: 'Send Text',
-				value: '/api/sendText',
+				value: 'Send Text',
 				action: 'Send a text message',
 				description: 'Send a text message',
 				routing: {
@@ -25,7 +25,7 @@ export const ChattingOperations: INodeProperties[] = [
 				},
 			},
 		],
-		default: '/api/sendText',
+		default: 'Send Text',
 	},
 ];
 export const ChattingFields: INodeProperties[] = [];

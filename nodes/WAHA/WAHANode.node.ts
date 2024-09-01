@@ -40,22 +40,22 @@ export class WAHANode implements INodeType {
 				options: [
 					{
 						name: '🖥️ Session',
-						value: 'session',
+						value: 'Session',
 					},
 					{
 						name: '🔑 Auth',
-						value: 'auth',
+						value: 'Auth',
 					},
 					{
 						name: '🖼️ Screenshot',
-						value: 'screenshot',
+						value: 'Screenshot',
 					},
 					{
 						name: '📤 Chatting',
-						value: 'chatting',
+						value: 'Chatting',
 					}
 				],
-				default: 'chatting',
+				default: 'Chatting',
 			},
 			...SessionOperations,
 			...SessionFields,
