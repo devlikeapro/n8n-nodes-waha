@@ -21,15 +21,7 @@ export class WAHAApi implements ICredentialType {
             typeOptions: { password: true },
             default: '',
 						required: false,
-        },
-        {
-            displayName: 'Session',
-            name: 'session',
-            type: 'string',
-            typeOptions: { password: true },
-            default: 'default',
-						required: false,
-        },
+        }
     ];
 
     authenticate: IAuthenticateGeneric = {
