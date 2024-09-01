@@ -13,7 +13,7 @@ export const SessionOperations: INodeProperties[] = [
 		},
 		options: [
 			{
-				name: 'List',
+				name: '📜 List',
 				value: 'list',
 				action: 'List sessions',
 				description: 'List all sessions',
@@ -21,6 +21,17 @@ export const SessionOperations: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '/api/sessions',
+					},
+				},
+			},
+			{
+				name: '📖 Get',
+				action: 'Get a session',
+				value: 'get',
+				description: 'Get a session by name',
+				routing: {
+					request: {
+						method: 'GET',
 					},
 				},
 			},
@@ -47,6 +58,23 @@ export const SessionFields: INodeProperties[] = [
 				qs: {
 					all: '={{ $value }}',
 				},
+			},
+		},
+	},
+	{
+		displayName: 'Session Name',
+		name: 'name',
+		type: 'string',
+		displayOptions: {
+			show: {
+				resource: ['session'],
+				operation: ['get'],
+			},
+		},
+		default: "default",
+		routing: {
+			request: {
+				url: '/api/sessions/{{ $value }}',
 			},
 		},
 	},
