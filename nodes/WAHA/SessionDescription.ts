@@ -33,14 +33,15 @@ export const SessionFields: INodeProperties[] = [
 	{
 		displayName: 'All Sessions',
 		name: 'all',
-		type: 'options',
+		type: 'boolean',
 		displayOptions: {
 			show: {
 				resource: ['session'],
 				operation: ['list'],
 			},
 		},
-		default: 'true',
+		default: true,
+		description: 'Whether to return all sessions (including STOPPED) or only the ones that are active',
 		routing: {
 			request: {
 				qs: {
@@ -48,17 +49,5 @@ export const SessionFields: INodeProperties[] = [
 				},
 			},
 		},
-		options: [
-			{
-				name: 'True',
-				value: 'true',
-				description: "Include STOPPED session"
-			},
-			{
-				name: 'False',
-				value: 'false',
-				description: "Exclude STOPPED session"
-			},
-		],
 	},
 ];
