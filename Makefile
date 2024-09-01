@@ -1,5 +1,4 @@
-clean:
-	rm -rf ./dist
+.PHONY: clean build link start dev
 
 build:
 	npm run lint && npm run build
@@ -16,4 +15,5 @@ dev:
 	make link
 	make start
 
-
+clean:
+	rm -rf ./dist
