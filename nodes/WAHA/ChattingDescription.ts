@@ -7,6 +7,10 @@ export const ChattingDescription: INodeProperties[] = parser.parse('Chatting', [
 		method: 'post',
 	},
 	{
+		uri: '/api/sendImage',
+		method: 'post',
+	},
+	{
 		uri: '/api/checkNumberStatus',
 		method: 'get',
 	},
