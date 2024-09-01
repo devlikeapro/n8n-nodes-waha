@@ -13,6 +13,16 @@ function replaceToParameter(uri: string): string {
 	return uri.replace(/{([^}]*)}/g, '{{$parameter["$1"]}}');
 }
 
+function sessionFirst(a: any, b: any){
+	if (a.name === 'session') {
+		return -1;
+	}
+	if (b.name === 'session') {
+		return 1;
+	}
+	return 0;
+}
+
 export class Parser {
 	constructor(private schema: any) {}
 
@@ -86,6 +96,8 @@ export class Parser {
 		fields.push(...parameterFields);
 		const bodyFields = this.parseRequestBody(operation.requestBody, resourceName, operationName);
 		fields.push(...bodyFields);
+		// sort fields, so "session" always top
+		fields.sort(sessionFirst)
 		return fields;
 	}
 
@@ -115,7 +127,7 @@ export class Parser {
 		const name = parameter.name;
 		let schemaType = parameter.schema.type;
 		if (!schemaType) {
-			if (parameter.schema['$ref'] && parameter.schema['oneOf']) {
+			if (parameter.schema['$ref'] || parameter.schema['oneOf'] || parameter.schema['allOf']) {
 				schemaType = 'json';
 			}
 		}
