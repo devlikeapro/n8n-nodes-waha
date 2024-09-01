@@ -1,9 +1,6 @@
 import { INodeProperties } from 'n8n-workflow/dist/Interfaces';
+import {parser} from "./openapiParser";
 
-import { paths, components } from './openapi/openapi.json';
-import { Parser } from './openapi/parser';
-
-const parser = new Parser({ paths, components });
 
 export const SessionDescription: INodeProperties[] = parser.parse('Session', [
 	{

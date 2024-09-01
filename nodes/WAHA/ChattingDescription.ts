@@ -1,31 +1,33 @@
 import { INodeProperties } from 'n8n-workflow/dist/Interfaces';
+import {parser} from "./openapiParser";
 
-export const ChattingOperations: INodeProperties[] = [
+export const ChattingDescription: INodeProperties[] = parser.parse('Chatting', [
 	{
-		displayName: 'Operation',
-		name: 'operation',
-		type: 'options',
-		noDataExpression: true,
-		displayOptions: {
-			show: {
-				resource: ['Chatting'],
-			},
-		},
-		options: [
-			{
-				name: 'Send Text',
-				value: 'Send Text',
-				action: 'Send a text message',
-				description: 'Send a text message',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '/api/sendText',
-					},
-				},
-			},
-		],
-		default: 'Send Text',
+		uri: '/api/sendText',
+		method: 'post',
 	},
-];
-export const ChattingFields: INodeProperties[] = [];
+	{
+		uri: '/api/checkNumberStatus',
+		method: 'get',
+	},
+	{
+		uri: '/api/sendSeen',
+		method: 'post',
+	},
+	{
+		uri: '/api/startTyping',
+		method: 'post',
+	},
+	{
+		uri: '/api/stopTyping',
+		method: 'post',
+	},
+	{
+		uri: '/api/reaction',
+		method: 'put',
+	},
+	{
+		uri: '/api/star',
+		method: 'put',
+	},
+]);

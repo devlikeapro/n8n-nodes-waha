@@ -126,13 +126,14 @@ export class Parser {
 				break;
 			case 'string':
 			case undefined:
+			case "object":
 				type = 'string';
 				break
 			case "json":
 				type = 'json';
 				break;
 			default:
-				throw new Error(`Type ${schemaType} not supported`);
+				throw new Error(`Type ${schemaType} not supported - ${name}`);
 		}
 
 		const field: INodeProperties = {
