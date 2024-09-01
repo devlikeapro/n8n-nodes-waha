@@ -53,6 +53,21 @@ export const SessionOperations: INodeProperties[] = [
 				},
 			},
 			{
+				name: 'Update',
+				action: 'Update a session',
+				value: 'update',
+				description: 'Update a session',
+				routing: {
+					request: {
+						method: 'PUT',
+						url: '=/api/sessions/{{$parameter["sessionName"]}}',
+						body: {
+							config: '{{$parameter["sessionConfig"]}}',
+						},
+					},
+				},
+			},
+			{
 				name: 'Delete',
 				action: 'Delete a session',
 				value: 'delete',
@@ -117,6 +132,25 @@ export const SessionOperations: INodeProperties[] = [
 	},
 ];
 
+const sessionConfigDefault = {
+	metadata: {
+		'user.id': '123',
+	},
+	debug: false,
+	webhooks: [
+		{
+			url: 'https://webhook.site/',
+			events: ['message', 'session.status'],
+		},
+	],
+	noweb: {
+		store: {
+			enabled: true,
+			fullSync: false,
+		},
+	},
+};
+
 export const SessionFields: INodeProperties[] = [
 	{
 		displayName: 'All Sessions',
@@ -146,9 +180,41 @@ export const SessionFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['session'],
-				operation: ['get'],
+				operation: ['get', 'create', 'update', 'delete', 'start', 'stop', 'logout', 'restart'],
 			},
 		},
 		default: 'default',
+	},
+	{
+		displayName: 'Session Config',
+		name: 'sessionConfig',
+		type: 'json',
+		default: JSON.stringify(sessionConfigDefault, null, 2),
+		displayOptions: {
+			show: {
+				resource: ['session'],
+				operation: ['create', 'update'],
+			},
+		},
+	},
+	{
+		displayName: 'Start Session',
+		name: 'start',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: ['session'],
+				operation: ['create'],
+			},
+		},
+		default: true,
+		description: 'Whether to start the session at creation',
+		routing: {
+			request: {
+				body: {
+					start: '={{ $value }}',
+				},
+			},
+		},
 	},
 ];
