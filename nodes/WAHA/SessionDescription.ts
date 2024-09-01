@@ -1,11 +1,11 @@
 import { INodeProperties } from 'n8n-workflow/dist/Interfaces';
 
-import { paths,components } from './openapi/openapi.json';
+import { paths, components } from './openapi/openapi.json';
 import { Parser } from './openapi/parser';
 
-const parser = new Parser({paths, components});
+const parser = new Parser({ paths, components });
 
-export const SessionOperations: INodeProperties[] = parser.parse('Session', [
+export const SessionDescription: INodeProperties[] = parser.parse('Session', [
 	{
 		uri: '/api/sessions',
 		method: 'get',
@@ -48,4 +48,27 @@ export const SessionOperations: INodeProperties[] = parser.parse('Session', [
 	},
 ]);
 
-export const SessionFields: INodeProperties[] = [];
+const sessionConfigDefault = {
+	metadata: {
+		'user.id': '123',
+	},
+	debug: false,
+	webhooks: [
+		{
+			url: 'https://webhook.site/',
+			events: ['message', 'session.status'],
+		},
+	],
+	noweb: {
+		store: {
+			enabled: true,
+			fullSync: false,
+		},
+	},
+};
+// Change "config" field example for create and update
+SessionDescription.forEach((node) => {
+	if (node.name === 'config' && node.type === 'json') {
+		node.default = JSON.stringify(sessionConfigDefault, null, 2);
+	}
+});
