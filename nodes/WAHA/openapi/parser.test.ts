@@ -23,7 +23,7 @@ test('query param', () => {
 		},
 	};
 
-	const parser = new Parser(paths);
+	const parser = new Parser({ paths });
 	const result = parser.parse('Entity', [
 		{
 			uri: '/api/entities',
@@ -103,7 +103,7 @@ test('path param', () => {
 		},
 	};
 
-	const parser = new Parser(paths);
+	const parser = new Parser({ paths });
 
 	const result = parser.parse('Entity', [
 		{
@@ -151,6 +151,152 @@ test('path param', () => {
 			default: 'default',
 			required: true,
 			description: 'Entity <code>name</code>',
+		},
+	]);
+});
+
+test('request body', () => {
+	const paths = {
+		'/api/entities': {
+			post: {
+				operationId: 'EntityController_create',
+				summary: 'Create entity',
+				requestBody: {
+					content: {
+						'application/json': {
+							schema: {
+								$ref: '#/components/schemas/Entity',
+							},
+						},
+					},
+				},
+				tags: ['🖥️ Tag'],
+			},
+		},
+	};
+	const components = {
+		schemas: {
+			Entity: {
+				type: 'object',
+				properties: {
+					name: {
+						type: 'string',
+						maxLength: 54,
+						example: 'default',
+						description: 'Entity name',
+					},
+					start: {
+						type: 'boolean',
+						description: 'Boolean flag description',
+						example: true,
+						default: true,
+					},
+					config: {
+						$ref: '#/components/schemas/EntityConfig',
+					},
+				},
+				required: ['name'],
+			},
+		},
+	};
+
+	const parser = new Parser({ paths, components });
+
+	const result = parser.parse('Entity', [
+		{
+			uri: '/api/entities',
+			method: 'post',
+		},
+	]);
+	expect(result).toEqual([
+		{
+			displayName: 'Operation',
+			name: 'operation',
+			type: 'options',
+			noDataExpression: true,
+			displayOptions: {
+				show: {
+					resource: ['Entity'],
+				},
+			},
+			options: [
+				{
+					name: 'Create',
+					value: 'Create',
+					action: 'Create entity',
+					description: 'Create entity',
+					routing: {
+						request: {
+							method: 'POST',
+							url: '=/api/entities',
+						},
+					},
+				},
+			],
+			default: 'Create',
+		},
+		{
+			displayName: 'Name',
+			name: 'name',
+			type: 'string',
+			default: 'default',
+			description: 'Entity name',
+			required: true,
+			displayOptions: {
+				show: {
+					resource: ['Entity'],
+					operation: ['Create'],
+				},
+			},
+			routing: {
+				request: {
+					body: {
+						name: '={{ $value }}',
+					},
+				},
+			},
+		},
+		{
+			displayName: 'Start',
+			name: 'start',
+			type: 'boolean',
+			default: true,
+			required: undefined,
+			// eslint-disable-next-line n8n-nodes-base/node-param-description-boolean-without-whether
+			description: 'Boolean flag description',
+			displayOptions: {
+				show: {
+					resource: ['Entity'],
+					operation: ['Create'],
+				},
+			},
+			routing: {
+				request: {
+					body: {
+						start: '={{ $value }}',
+					},
+				},
+			},
+		},
+		{
+			displayName: 'Config',
+			name: 'config',
+			type: 'json',
+			displayOptions: {
+				show: {
+					resource: ['Entity'],
+					operation: ['Create'],
+				},
+			},
+			default: '{}',
+			required: undefined,
+			routing: {
+				request: {
+					body: {
+						config: '={{ JSON.parse($value) }}',
+					},
+				},
+			},
 		},
 	]);
 });
