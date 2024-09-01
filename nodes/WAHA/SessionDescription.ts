@@ -15,7 +15,7 @@ export const SessionOperations: INodeProperties[] = [
 			{
 				name: '📜 List',
 				value: 'list',
-				action: 'List sessions',
+				action: '📜 List sessions',
 				description: 'List all sessions',
 				routing: {
 					request: {
@@ -26,7 +26,7 @@ export const SessionOperations: INodeProperties[] = [
 			},
 			{
 				name: '📖 Get',
-				action: 'Get a session',
+				action: '📖 Get a session',
 				value: 'get',
 				description: 'Get a session by name',
 				routing: {
@@ -74,7 +74,7 @@ export const SessionFields: INodeProperties[] = [
 		default: "default",
 		routing: {
 			request: {
-				url: '/api/sessions/{{ $value }}',
+				url: '=/api/sessions/{{$value}}',
 			},
 		},
 	},
