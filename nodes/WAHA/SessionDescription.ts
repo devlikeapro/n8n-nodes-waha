@@ -46,8 +46,8 @@ export const SessionOperations: INodeProperties[] = [
 						method: 'POST',
 						url: '/api/sessions',
 						body: {
-							name: '{{$parameter["sessionName"]}}',
-							config: '{{$parameter["sessionConfig"]}}',
+							name: '={{$parameter["sessionName"]}}',
+							config: '={{JSON.parse($parameter["sessionConfig"])}}',
 						},
 					},
 				},
@@ -62,7 +62,7 @@ export const SessionOperations: INodeProperties[] = [
 						method: 'PUT',
 						url: '=/api/sessions/{{$parameter["sessionName"]}}',
 						body: {
-							config: '{{$parameter["sessionConfig"]}}',
+							config: '={{JSON.parse($parameter["sessionConfig"])}}',
 						},
 					},
 				},
