@@ -1,6 +1,6 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import {SessionDescription} from './SessionDescription';
-import {AuthFields, AuthOperations} from "./AuthDescription";
+import {AuthDescription} from "./AuthDescription";
 import {ChattingDescription} from "./ChattingDescription";
 import {ScreenshotFields, ScreenshotOperations} from "./ScreenshotDescription";
 
@@ -58,8 +58,7 @@ export class WAHANode implements INodeType {
 				default: 'Chatting',
 			},
 			...SessionDescription,
-			...AuthOperations,
-			...AuthFields,
+			...AuthDescription,
 			...ScreenshotOperations,
 			...ScreenshotFields,
 			...ChattingDescription,
