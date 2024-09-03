@@ -3,6 +3,7 @@ import {SessionDescription} from './SessionDescription';
 import {AuthDescription} from "./AuthDescription";
 import {ChattingDescription} from "./ChattingDescription";
 import {ScreenshotFields, ScreenshotOperations} from "./ScreenshotDescription";
+import {parser} from "./openapiParser";
 
 export class WAHANode implements INodeType {
 	description: INodeTypeDescription = {
@@ -32,31 +33,7 @@ export class WAHANode implements INodeType {
 			baseURL: '={{$credentials.url}}',
 		},
 		properties: [
-			{
-				displayName: 'Resource',
-				name: 'resource',
-				type: 'options',
-				noDataExpression: true,
-				options: [
-					{
-						name: '🖥️ Session',
-						value: 'Session',
-					},
-					{
-						name: '🔑 Auth',
-						value: 'Auth',
-					},
-					{
-						name: '🖼️ Screenshot',
-						value: 'Screenshot',
-					},
-					{
-						name: '📤 Chatting',
-						value: 'Chatting',
-					}
-				],
-				default: 'Chatting',
-			},
+			parser.getResources(),
 			...SessionDescription,
 			...AuthDescription,
 			...ScreenshotOperations,

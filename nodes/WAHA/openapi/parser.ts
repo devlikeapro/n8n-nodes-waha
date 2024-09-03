@@ -1,10 +1,10 @@
-import { INodeProperties, NodePropertyTypes } from 'n8n-workflow/dist/Interfaces';
+import {INodeProperties, NodePropertyTypes} from 'n8n-workflow/dist/Interfaces';
 import * as lodash from 'lodash';
 import {OpenAPIV3} from 'openapi-types';
 
 interface Action {
 	uri: string;
-	method: "get"| "post" | "put" | "delete" | "patch";
+	method: "get" | "post" | "put" | "delete" | "patch";
 }
 
 /**
@@ -12,6 +12,9 @@ interface Action {
  */
 function replaceToParameter(uri: string): string {
 	return uri.replace(/{([^}]*)}/g, '{{$parameter["$1"]}}');
+}
+function singular(name: string){
+	return name.replace(/s$/, '');
 }
 
 function sessionFirst(a: any, b: any) {
@@ -25,7 +28,8 @@ function sessionFirst(a: any, b: any) {
 }
 
 export class Parser {
-	constructor(private doc: OpenAPIV3.Document) {}
+	constructor(private doc: OpenAPIV3.Document) {
+	}
 
 	get paths(): OpenAPIV3.PathsObject {
 		return this.doc.paths;
@@ -37,7 +41,7 @@ export class Parser {
 		for (const action of actions) {
 			const ops: OpenAPIV3.PathItemObject = this.paths[action.uri]!!
 			const operation = ops[action.method as OpenAPIV3.HttpMethods]!!
-			const { option, fields } = this.parseOperation(
+			const {option, fields} = this.parseOperation(
 				resource,
 				operation,
 				action.uri,
@@ -231,9 +235,30 @@ export class Parser {
 			// @ts-ignore
 			schema = schema[path];
 		}
-		if ("$ref" in schema){
+		if ("$ref" in schema) {
 			return this.resolveRef(schema["$ref"]);
 		}
 		return schema;
+	}
+
+	getResources(): INodeProperties {
+		const tags = this.doc.tags || []
+		const options = tags.map((tag) => {
+			const name = singular(tag.name)
+			return {
+				name: name,
+				// keep only ascii, no emojis
+				value: name.replace(/[^a-zA-Z0-9]/g, ''),
+				description: tag.description
+			};
+		})
+		return {
+			displayName: 'Resource',
+			name: 'resource',
+			type: 'options',
+			noDataExpression: true,
+			options: options,
+			default: 'Chatting',
+		}
 	}
 }

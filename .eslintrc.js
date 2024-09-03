@@ -47,6 +47,7 @@ module.exports = {
 				'n8n-nodes-base/node-resource-description-filename-against-convention': 'off',
 				'n8n-nodes-base/node-param-fixed-collection-type-unsorted-items': 'off',
 				'n8n-nodes-base/node-param-options-type-unsorted-items': 'off',
+				"n8n-nodes-base/node-param-resource-with-plural-option": "off",
 			},
 		},
 	],
