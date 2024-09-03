@@ -24,7 +24,7 @@ test('query param', () => {
 	};
 
 	// @ts-ignore
-	const parser = new Parser({ paths });
+	const parser = new Parser({ paths }, { addUriAfterOperation: true });
 	const result = parser.parse('Entity', {
 		uri: '/api/entities',
 		method: 'get',
@@ -55,6 +55,21 @@ test('query param', () => {
 				},
 			],
 			default: 'List',
+		},
+		{
+			displayName: 'GET /api/entities',
+			default: '',
+			displayOptions: {
+				show: {
+					operation: ['List'],
+					resource: ['Entity'],
+				},
+			},
+			name: 'operation',
+			type: 'notice',
+			typeOptions: {
+				theme: 'info',
+			},
 		},
 		{
 			displayName: 'All',
@@ -103,7 +118,7 @@ test('path param', () => {
 	};
 
 	// @ts-ignore
-	const parser = new Parser({ paths });
+	const parser = new Parser({ paths }, { addUriAfterOperation: false });
 
 	const result = parser.parse('Entity', {
 		uri: '/api/entities/{entity}',
@@ -208,7 +223,7 @@ test('request body', () => {
 	};
 
 	// @ts-ignore
-	const parser = new Parser({ paths, components });
+	const parser = new Parser({ paths, components }, { addUriAfterOperation: false });
 
 	const result = parser.parse('Entity', {
 		uri: '/api/entities',
@@ -307,7 +322,7 @@ test('request body', () => {
 	]);
 });
 
-test('enum schema' , () => {
+test('enum schema', () => {
 	const paths = {
 		'/api/entities': {
 			post: {
@@ -335,7 +350,7 @@ test('enum schema' , () => {
 	};
 
 	// @ts-ignore
-	const parser = new Parser({ paths });
+	const parser = new Parser({ paths }, { addUriAfterOperation: false });
 
 	const result = parser.parse('Entity', {
 		uri: '/api/entities',
@@ -372,7 +387,7 @@ test('enum schema' , () => {
 			displayName: 'Type',
 			name: 'type',
 			type: 'options',
-			default: "type1",
+			default: 'type1',
 			required: true,
 			options: [
 				{
@@ -399,4 +414,4 @@ test('enum schema' , () => {
 			},
 		},
 	]);
-})
+});

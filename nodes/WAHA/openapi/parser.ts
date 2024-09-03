@@ -31,6 +31,10 @@ function sessionFirst(a: any, b: any) {
 	return 0;
 }
 
+export interface ParserConfig {
+	addUriAfterOperation: boolean;
+}
+
 export class Parser {
 	public resourceNode?: INodeProperties;
 	public operations: INodeProperties[];
@@ -38,7 +42,12 @@ export class Parser {
 
 	private operationByResource: Map<string, any[]> = new Map();
 
-	constructor(private doc: OpenAPIV3.Document) {
+	constructor(
+		private doc: OpenAPIV3.Document,
+		private config: ParserConfig = {
+			addUriAfterOperation: true,
+		},
+	) {
 		this.operations = [];
 		this.fields = [];
 	}
@@ -88,11 +97,12 @@ export class Parser {
 	) {
 		const operationId = operation.operationId!!.split('_').slice(1).join('_');
 		const name = lodash.startCase(operationId);
+		const description = operation.description || operation.summary || '';
 		const option = {
 			name: name,
 			value: name,
 			action: operation.summary || name,
-			description: operation.description || operation.summary,
+			description: description,
 			routing: {
 				request: {
 					method: method.toUpperCase(),
@@ -101,6 +111,27 @@ export class Parser {
 			},
 		};
 		const fields = this.parseFields(resourceName, name, operation);
+
+		if (this.config.addUriAfterOperation) {
+			const notice = {
+				displayName: `${method.toUpperCase()} ${uri}`,
+				name: 'operation',
+				type: 'notice',
+				typeOptions: {
+					theme: 'info',
+				},
+				displayOptions: {
+					show: {
+						resource: [resourceName],
+						operation: [name],
+					},
+				},
+				default: '',
+			};
+			// @ts-ignore
+			fields.unshift(notice);
+		}
+
 		return {
 			option: option,
 			fields: fields,
@@ -225,7 +256,7 @@ export class Parser {
 			return [];
 		}
 		const requestBodySchema = requestBody.content['application/json'].schema;
-		const requestSchema = this.resolveSchema(requestBodySchema)
+		const requestSchema = this.resolveSchema(requestBodySchema);
 		if (requestSchema.type != 'object') {
 			throw new Error(`Type '${requestSchema.type}' not supported`);
 		}
@@ -266,7 +297,7 @@ export class Parser {
 		return fields;
 	}
 
-	private resolveSchema(schema: any){
+	private resolveSchema(schema: any) {
 		if ('$ref' in schema) {
 			return this.resolveRef(schema['$ref']);
 		}
