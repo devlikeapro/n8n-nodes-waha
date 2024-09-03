@@ -4897,7 +4897,6 @@
         "required": [
           "chatId",
           "file",
-          "caption",
           "session"
         ]
       },
@@ -4934,7 +4933,6 @@
         "required": [
           "chatId",
           "file",
-          "caption",
           "session"
         ]
       },
@@ -5097,7 +5095,6 @@
         "required": [
           "chatId",
           "file",
-          "caption",
           "session"
         ]
       },
@@ -5584,8 +5581,7 @@
         },
         "required": [
           "contacts",
-          "file",
-          "caption"
+          "file"
         ]
       },
       "VoiceStatus": {
@@ -5612,7 +5608,7 @@
             ]
           },
           "backgroundColor": {
-            "type": "object",
+            "type": "string",
             "default": "#38b42f"
           }
         },
@@ -5651,8 +5647,7 @@
         },
         "required": [
           "contacts",
-          "file",
-          "caption"
+          "file"
         ]
       },
       "DeleteStatusRequest": {
