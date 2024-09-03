@@ -1,9 +1,10 @@
 import { INodeProperties, NodePropertyTypes } from 'n8n-workflow/dist/Interfaces';
 import * as lodash from 'lodash';
+import {OpenAPIV3} from 'openapi-types';
 
 interface Action {
 	uri: string;
-	method: string;
+	method: "get"| "post" | "put" | "delete" | "patch";
 }
 
 /**
@@ -13,7 +14,7 @@ function replaceToParameter(uri: string): string {
 	return uri.replace(/{([^}]*)}/g, '{{$parameter["$1"]}}');
 }
 
-function sessionFirst(a: any, b: any){
+function sessionFirst(a: any, b: any) {
 	if (a.name === 'session') {
 		return -1;
 	}
@@ -24,17 +25,18 @@ function sessionFirst(a: any, b: any){
 }
 
 export class Parser {
-	constructor(private schema: any) {}
+	constructor(private doc: OpenAPIV3.Document) {}
 
-	get paths() {
-		return this.schema.paths;
+	get paths(): OpenAPIV3.PathsObject {
+		return this.doc.paths;
 	}
 
 	parse(resource: string, actions: Action[]): INodeProperties[] {
 		const fieldNodes: any[] = [];
 		const options: any[] = [];
 		for (const action of actions) {
-			const operation = this.paths[action.uri][action.method];
+			const ops: OpenAPIV3.PathItemObject = this.paths[action.uri]!!
+			const operation = ops[action.method as OpenAPIV3.HttpMethods]!!
 			const { option, fields } = this.parseOperation(
 				resource,
 				operation,
@@ -63,8 +65,8 @@ export class Parser {
 		return [operations, ...fieldNodes] as INodeProperties[];
 	}
 
-	parseOperation(resourceName: string, operation: any, uri: string, method: string) {
-		const operationId = operation.operationId.split('_')[1];
+	parseOperation(resourceName: string, operation: OpenAPIV3.OperationObject, uri: string, method: string) {
+		const operationId = operation.operationId!!.split('_')[1];
 		const name = lodash.startCase(operationId);
 		const option = {
 			name: name,
@@ -97,7 +99,7 @@ export class Parser {
 		const bodyFields = this.parseRequestBody(operation.requestBody, resourceName, operationName);
 		fields.push(...bodyFields);
 		// sort fields, so "session" always top
-		fields.sort(sessionFirst)
+		fields.sort(sessionFirst);
 		return fields;
 	}
 
@@ -193,6 +195,7 @@ export class Parser {
 					name: key,
 					schema: property,
 					required: requestSchema.required && requestSchema.required?.includes(key),
+					// @ts-ignore
 					description: property.description,
 				},
 				resourceName,
@@ -221,11 +224,15 @@ export class Parser {
 		return fields;
 	}
 
-	private resolveRef(ref: string): any {
+	private resolveRef(ref: string): OpenAPIV3.SchemaObject {
 		const refPath = ref.split('/').slice(1);
-		let schema = this.schema;
+		let schema: any = this.doc;
 		for (const path of refPath) {
+			// @ts-ignore
 			schema = schema[path];
+		}
+		if ("$ref" in schema){
+			return this.resolveRef(schema["$ref"]);
 		}
 		return schema;
 	}

@@ -23,6 +23,7 @@ test('query param', () => {
 		},
 	};
 
+	// @ts-ignore
 	const parser = new Parser({ paths });
 	const result = parser.parse('Entity', [
 		{
@@ -103,6 +104,7 @@ test('path param', () => {
 		},
 	};
 
+	// @ts-ignore
 	const parser = new Parser({ paths });
 
 	const result = parser.parse('Entity', [
@@ -200,6 +202,7 @@ test('request body', () => {
 		},
 	};
 
+	// @ts-ignore
 	const parser = new Parser({ paths, components });
 
 	const result = parser.parse('Entity', [
