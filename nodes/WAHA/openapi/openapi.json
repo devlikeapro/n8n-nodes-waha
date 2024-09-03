@@ -5754,7 +5754,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "example": "123456789@c.us"
           }
         },
         "required": [
