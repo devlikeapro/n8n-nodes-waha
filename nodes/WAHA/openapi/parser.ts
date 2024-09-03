@@ -159,9 +159,9 @@ export class Parser {
 		}
 
 		let type: NodePropertyTypes;
-		let defaultValue = parameter.schema.default;
+		let defaultValue = parameter.example;
 		if (defaultValue === undefined) {
-			defaultValue = parameter.schema.example;
+			defaultValue = this.extractExample(parameter.schema)
 		}
 		switch (schemaType) {
 			case 'boolean':
@@ -176,7 +176,7 @@ export class Parser {
 			case 'object':
 			case 'json':
 				type = 'json';
-				defaultValue = defaultValue !== undefined ? defaultValue : '{}';
+				defaultValue = defaultValue !== undefined ? JSON.stringify(defaultValue, null, 2) : '{}';
 				break;
 			case 'array':
 				type = 'json';
@@ -237,7 +237,6 @@ export class Parser {
 				operationName,
 			);
 			if (field.type === 'json') {
-				field.default = '{}';
 				field.routing = {
 					request: {
 						body: {
@@ -265,6 +264,9 @@ export class Parser {
 		for (const path of refPath) {
 			// @ts-ignore
 			schema = schema[path];
+		}
+		if (!schema){
+			throw new Error(`Schema not found for ref ${ref}`);
 		}
 		if ('$ref' in schema) {
 			return this.resolveRef(schema['$ref']);
@@ -355,4 +357,32 @@ export class Parser {
 	private addOperation(operation: INodeProperties) {
 		this.operations.push(operation);
 	}
+
+	/**
+	 * Recursively extract "example" or "default" field, resolving $refs if any
+	 * @param schema
+	 */
+	extractExample(schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject): any {
+		if ('$ref' in schema) {
+			return this.extractExample(this.resolveRef(schema['$ref']));
+		}
+		if (schema.example !== undefined) {
+			return schema.example;
+		}
+		if (schema.default !== undefined) {
+			return schema.default;
+		}
+		if (schema.properties) {
+			const obj: any = {};
+			for (const key in schema.properties) {
+				obj[key] = this.extractExample(schema.properties[key]);
+			}
+			return obj;
+		}
+		if ("items" in schema && schema.items) {
+			return [this.extractExample(schema.items)];
+		}
+		return undefined;
+	}
+
 }

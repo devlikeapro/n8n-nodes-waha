@@ -25,12 +25,10 @@ test('query param', () => {
 
 	// @ts-ignore
 	const parser = new Parser({ paths });
-	const result = parser.parse('Entity',
-		{
-			uri: '/api/entities',
-			method: 'get',
-		}
-	);
+	const result = parser.parse('Entity', {
+		uri: '/api/entities',
+		method: 'get',
+	});
 	expect(result).toEqual([
 		{
 			displayName: 'Operation',
@@ -68,7 +66,7 @@ test('query param', () => {
 					operation: ['List'],
 				},
 			},
-			default: true,
+			default: false,
 			// eslint-disable-next-line n8n-nodes-base/node-param-description-boolean-without-whether
 			description: 'Boolean flag description',
 			routing: {
@@ -107,12 +105,10 @@ test('path param', () => {
 	// @ts-ignore
 	const parser = new Parser({ paths });
 
-	const result = parser.parse('Entity',
-		{
-			uri: '/api/entities/{entity}',
-			method: 'get',
-		}
-	);
+	const result = parser.parse('Entity', {
+		uri: '/api/entities/{entity}',
+		method: 'get',
+	});
 	expect(result).toEqual([
 		{
 			displayName: 'Operation',
@@ -199,18 +195,25 @@ test('request body', () => {
 				},
 				required: ['name'],
 			},
+			EntityConfig: {
+				type: 'object',
+				properties: {
+					foo: {
+						type: 'string',
+						example: 'bar',
+					},
+				},
+			},
 		},
 	};
 
 	// @ts-ignore
 	const parser = new Parser({ paths, components });
 
-	const result = parser.parse('Entity',
-		{
-			uri: '/api/entities',
-			method: 'post',
-		},
-	);
+	const result = parser.parse('Entity', {
+		uri: '/api/entities',
+		method: 'post',
+	});
 	expect(result).toEqual([
 		{
 			displayName: 'Operation',
@@ -291,7 +294,7 @@ test('request body', () => {
 					operation: ['Create'],
 				},
 			},
-			default: '{}',
+			default: JSON.stringify({ foo: 'bar' }, null, 2),
 			required: undefined,
 			routing: {
 				request: {
