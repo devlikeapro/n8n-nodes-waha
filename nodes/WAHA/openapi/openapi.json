@@ -4,7 +4,7 @@
     "/api/{session}/auth/qr": {
       "get": {
         "operationId": "AuthController_getQR",
-        "summary": "Get QR code for pairing WhatsApp Web.",
+        "summary": "Get QR code for pairing WhatsApp API.",
         "parameters": [
           {
             "name": "session",
@@ -13,7 +13,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "format",
@@ -76,7 +76,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -116,7 +116,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -156,7 +156,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "responses": {
@@ -201,7 +201,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -318,7 +318,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "responses": {
@@ -354,7 +354,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -400,7 +400,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "responses": {
@@ -430,7 +430,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "responses": {
@@ -468,7 +468,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "responses": {
@@ -506,7 +506,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "responses": {
@@ -544,7 +544,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "responses": {
@@ -582,7 +582,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "responses": {
@@ -710,80 +710,6 @@
         ]
       }
     },
-    "/api/checkNumberStatus": {
-      "get": {
-        "operationId": "ChattingController_checkNumberStatus",
-        "summary": "Check number status",
-        "parameters": [
-          {
-            "name": "phone",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "default": "default",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WANumberExistResult"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "📤 Chatting"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      }
-    },
-    "/api/sendContactVcard": {
-      "post": {
-        "operationId": "ChattingController_sendContactVcard",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageContactVcardRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "📤 Chatting"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      }
-    },
     "/api/sendText": {
       "post": {
         "operationId": "ChattingController_sendText",
@@ -861,102 +787,6 @@
                 }
               }
             }
-          }
-        },
-        "tags": [
-          "📤 Chatting"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      }
-    },
-    "/api/sendPoll": {
-      "post": {
-        "operationId": "ChattingController_sendPoll",
-        "summary": "Send a poll with options",
-        "description": "You can use it as buttons or list replacement",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessagePollRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "📤 Chatting"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      }
-    },
-    "/api/sendLocation": {
-      "post": {
-        "operationId": "ChattingController_sendLocation",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageLocationRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "📤 Chatting"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      }
-    },
-    "/api/sendLinkPreview": {
-      "post": {
-        "operationId": "ChattingController_sendLinkPreview",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageLinkPreviewRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
           }
         },
         "tags": [
@@ -1086,7 +916,8 @@
     "/api/sendVideo": {
       "post": {
         "operationId": "ChattingController_sendVideo",
-        "summary": "Send a video. Either from an URL or base64 data - look at the request schemas for details.",
+        "summary": "Send a video",
+        "description": "Either from an URL or base64 data - look at the request schemas for details.",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -1274,6 +1105,102 @@
         ]
       }
     },
+    "/api/sendPoll": {
+      "post": {
+        "operationId": "ChattingController_sendPoll",
+        "summary": "Send a poll with options",
+        "description": "You can use it as buttons or list replacement",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessagePollRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "📤 Chatting"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/sendLocation": {
+      "post": {
+        "operationId": "ChattingController_sendLocation",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageLocationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "📤 Chatting"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/sendLinkPreview": {
+      "post": {
+        "operationId": "ChattingController_sendLinkPreview",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageLinkPreviewRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "📤 Chatting"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
     "/api/messages": {
       "get": {
         "operationId": "ChattingController_getMessages",
@@ -1319,6 +1246,84 @@
         "responses": {
           "200": {
             "description": ""
+          }
+        },
+        "tags": [
+          "📤 Chatting"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/sendContactVcard": {
+      "post": {
+        "operationId": "ChattingController_sendContactVcard",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageContactVcardRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "📤 Chatting"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/checkNumberStatus": {
+      "get": {
+        "operationId": "ChattingController_DEPRECATED_checkNumberStatus",
+        "summary": "Check number status",
+        "description": "DEPRECATED. Use \"POST /contacts/check-exists\" instead",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "phone",
+            "required": true,
+            "in": "query",
+            "description": "The phone number to check",
+            "example": "1213213213",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "default": "default",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WANumberExistResult"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1381,7 +1386,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "limit",
@@ -1427,12 +1432,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "chatId",
             "required": true,
             "in": "path",
+            "description": "Chat ID",
+            "example": "123456789@c.us",
             "schema": {
               "type": "string"
             }
@@ -1485,12 +1492,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "chatId",
             "required": true,
             "in": "path",
+            "description": "Chat ID",
+            "example": "123456789@c.us",
             "schema": {
               "type": "string"
             }
@@ -1521,12 +1530,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "chatId",
             "required": true,
             "in": "path",
+            "description": "Chat ID",
+            "example": "123456789@c.us",
             "schema": {
               "type": "string"
             }
@@ -1559,7 +1570,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "chatId",
@@ -1607,7 +1618,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "chatId",
@@ -1667,7 +1678,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "chatId",
@@ -1714,7 +1725,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "chatId",
@@ -1761,7 +1772,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "role",
@@ -1812,7 +1823,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -1859,7 +1870,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
@@ -1887,7 +1898,8 @@
       },
       "get": {
         "operationId": "ChannelsController_get",
-        "summary": "Get the channel info - either by id @newsletter OR invite code.",
+        "summary": "Get the channel info",
+        "description": "You can use either id (123@newsletter) OR invite code (https://www.whatsapp.com/channel/123)",
         "parameters": [
           {
             "name": "session",
@@ -1896,7 +1908,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
@@ -1942,7 +1954,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
@@ -1981,7 +1993,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
@@ -2020,7 +2032,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
@@ -2059,7 +2071,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
@@ -2089,7 +2101,7 @@
     "/api/{session}/status/text": {
       "post": {
         "operationId": "StatusController_sendTextStatus",
-        "summary": "Send text status.",
+        "summary": "Send text status",
         "parameters": [
           {
             "name": "session",
@@ -2098,7 +2110,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -2129,7 +2141,7 @@
     "/api/{session}/status/image": {
       "post": {
         "operationId": "StatusController_sendImageStatus",
-        "summary": "Send image status.",
+        "summary": "Send image status",
         "parameters": [
           {
             "name": "session",
@@ -2138,7 +2150,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -2169,7 +2181,7 @@
     "/api/{session}/status/voice": {
       "post": {
         "operationId": "StatusController_sendVoiceStatus",
-        "summary": "Send voice status.",
+        "summary": "Send voice status",
         "parameters": [
           {
             "name": "session",
@@ -2178,7 +2190,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -2209,7 +2221,7 @@
     "/api/{session}/status/video": {
       "post": {
         "operationId": "StatusController_sendVideoStatus",
-        "summary": "Send video status.",
+        "summary": "Send video status",
         "parameters": [
           {
             "name": "session",
@@ -2218,7 +2230,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -2249,7 +2261,7 @@
     "/api/{session}/status/delete": {
       "post": {
         "operationId": "StatusController_deleteStatus",
-        "summary": "DELETE sent status.",
+        "summary": "DELETE sent status",
         "parameters": [
           {
             "name": "session",
@@ -2258,7 +2270,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -2298,7 +2310,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "responses": {
@@ -2338,12 +2350,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "chatId",
             "required": true,
             "in": "path",
+            "description": "Chat ID",
+            "example": "123456789@c.us",
             "schema": {
               "type": "string"
             }
@@ -2384,12 +2398,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "chatId",
             "required": true,
             "in": "path",
+            "description": "Chat ID",
+            "example": "123456789@c.us",
             "schema": {
               "type": "string"
             }
@@ -2432,7 +2448,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "labelId",
@@ -2461,12 +2477,14 @@
     "/api/contacts": {
       "get": {
         "operationId": "ContactsController_get",
-        "summary": "Get contact basic info. The method always return result, even if the phone number is not registered in WhatsApp. For that - use /check-exists endpoint below.",
+        "summary": "Get contact basic info",
+        "description": "The method always return result, even if the phone number is not registered in WhatsApp. For that - use /contacts/check-exists endpoint below.",
         "parameters": [
           {
             "name": "contactId",
             "required": true,
             "in": "query",
+            "example": "11111111111@c.us",
             "schema": {
               "type": "string"
             }
@@ -2535,6 +2553,8 @@
             "name": "phone",
             "required": true,
             "in": "query",
+            "description": "The phone number to check",
+            "example": "1213213213",
             "schema": {
               "type": "string"
             }
@@ -2574,12 +2594,14 @@
     "/api/contacts/about": {
       "get": {
         "operationId": "ContactsController_getAbout",
-        "summary": "Gets the Contact's current \"about\" info. Returns null if you don't have permission to read their status.",
+        "summary": "Gets the Contact's \"about\" info",
+        "description": "Returns null if you do not have permission to read their status.",
         "parameters": [
           {
             "name": "contactId",
             "required": true,
             "in": "query",
+            "example": "11111111111@c.us",
             "schema": {
               "type": "string"
             }
@@ -2612,12 +2634,14 @@
     "/api/contacts/profile-picture": {
       "get": {
         "operationId": "ContactsController_getProfilePicture",
-        "summary": "Returns the contact's profile picture URL, if privacy settings allow it.",
+        "summary": "Get contact's profile picture URL",
+        "description": "If privacy settings do not allow to get the picture, the method will return null.",
         "parameters": [
           {
             "name": "contactId",
             "required": true,
             "in": "query",
+            "example": "11111111111@c.us",
             "schema": {
               "type": "string"
             }
@@ -2719,7 +2743,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -2757,7 +2781,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "responses": {
@@ -2787,12 +2811,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -2823,12 +2849,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -2852,7 +2880,8 @@
     "/api/{session}/groups/{id}/settings/security/info-admin-only": {
       "put": {
         "operationId": "GroupsController_setInfoAdminOnly",
-        "summary": "Updates the group settings to only allow admins to edit group info (title, description, photo).",
+        "summary": "Updates the group \"info admin only\" settings.",
+        "description": "You can allow only admins to edit group info (title, description, photo).",
         "parameters": [
           {
             "name": "session",
@@ -2861,12 +2890,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -2898,7 +2929,8 @@
       },
       "get": {
         "operationId": "GroupsController_getInfoAdminOnly",
-        "summary": "Gets the group settings to only allow admins to edit group info (title, description, photo).",
+        "summary": "Get the group's 'info admin only' settings.",
+        "description": "You can allow only admins to edit group info (title, description, photo).",
         "parameters": [
           {
             "name": "session",
@@ -2907,12 +2939,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -2943,7 +2977,8 @@
     "/api/{session}/groups/{id}/settings/security/messages-admin-only": {
       "put": {
         "operationId": "GroupsController_setMessagesAdminOnly",
-        "summary": "Updates the group settings to only allow admins to send messages.",
+        "summary": "Update settings - who can send messages",
+        "description": "Updates the group settings to only allow admins to send messages.",
         "parameters": [
           {
             "name": "session",
@@ -2952,12 +2987,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -2989,7 +3026,8 @@
       },
       "get": {
         "operationId": "GroupsController_getMessagesAdminOnly",
-        "summary": "Gets the group settings to only allow admins to send messages.",
+        "summary": "Get settings - who can send messages",
+        "description": "The group settings to only allow admins to send messages.",
         "parameters": [
           {
             "name": "session",
@@ -2998,12 +3036,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -3043,12 +3083,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -3072,7 +3114,8 @@
     "/api/{session}/groups/{id}/description": {
       "put": {
         "operationId": "GroupsController_setDescription",
-        "summary": "Updates the group description.\nReturns true if the subject was properly updated. This can return false if the user does not have the necessary permissions.\n",
+        "summary": "Updates the group description.",
+        "description": "Returns \"true\" if the subject was properly updated. This can return \"false\" if the user does not have the necessary permissions.",
         "parameters": [
           {
             "name": "session",
@@ -3081,12 +3124,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -3120,7 +3165,8 @@
     "/api/{session}/groups/{id}/subject": {
       "put": {
         "operationId": "GroupsController_setSubject",
-        "summary": "Updates the group subject.\nReturns true if the subject was properly updated. This can return false if the user does not have the necessary permissions.\n",
+        "summary": "Updates the group subject",
+        "description": "Returns \"true\" if the subject was properly updated. This can return \"false\" if the user does not have the necessary permissions.",
         "parameters": [
           {
             "name": "session",
@@ -3129,12 +3175,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -3168,7 +3216,7 @@
     "/api/{session}/groups/{id}/invite-code": {
       "get": {
         "operationId": "GroupsController_getInviteCode",
-        "summary": "Gets the invite code for a specific group.",
+        "summary": "Gets the invite code for the group.",
         "parameters": [
           {
             "name": "session",
@@ -3177,12 +3225,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -3222,12 +3272,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -3258,7 +3310,7 @@
     "/api/{session}/groups/{id}/participants": {
       "get": {
         "operationId": "GroupsController_getParticipants",
-        "summary": "Get a list of participants by in the group.",
+        "summary": "Get participants",
         "parameters": [
           {
             "name": "session",
@@ -3267,12 +3319,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -3296,7 +3350,7 @@
     "/api/{session}/groups/{id}/participants/add": {
       "post": {
         "operationId": "GroupsController_addParticipants",
-        "summary": "Adds a list of participants by ID to the group.",
+        "summary": "Add participants",
         "parameters": [
           {
             "name": "session",
@@ -3305,12 +3359,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -3344,7 +3400,7 @@
     "/api/{session}/groups/{id}/participants/remove": {
       "post": {
         "operationId": "GroupsController_removeParticipants",
-        "summary": "Removes a list of participants by ID to the group.",
+        "summary": "Remove participants",
         "parameters": [
           {
             "name": "session",
@@ -3353,12 +3409,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -3401,12 +3459,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -3440,7 +3500,7 @@
     "/api/{session}/groups/{id}/admin/demote": {
       "post": {
         "operationId": "GroupsController_demoteToAdmin",
-        "summary": "Demotes participants by to regular users.",
+        "summary": "Demotes participants to regular users.",
         "parameters": [
           {
             "name": "session",
@@ -3449,12 +3509,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Group ID",
+            "example": "123123123@g.us",
             "schema": {
               "type": "string"
             }
@@ -3497,7 +3559,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "requestBody": {
@@ -3535,7 +3597,7 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           }
         ],
         "responses": {
@@ -3575,12 +3637,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "chatId",
             "required": true,
             "in": "path",
+            "description": "Chat ID",
+            "example": "123456789@c.us",
             "schema": {
               "type": "string"
             }
@@ -3620,12 +3684,14 @@
             "schema": {
               "default": "default"
             },
-            "description": "Session <code>name</code>"
+            "description": "Session name"
           },
           {
             "name": "chatId",
             "required": true,
             "in": "path",
+            "description": "Chat ID",
+            "example": "123456789@c.us",
             "schema": {
               "type": "string"
             }
@@ -3695,7 +3761,8 @@
     "/ping": {
       "get": {
         "operationId": "PingController_ping",
-        "summary": "Ping the server, perform no operations.",
+        "summary": "Ping the server",
+        "description": "Check if the server is alive and responding to requests.",
         "parameters": [],
         "responses": {
           "200": {
@@ -3722,7 +3789,8 @@
     "/health": {
       "get": {
         "operationId": "HealthController_check",
-        "summary": "Check the health of the server, performing all health checks.",
+        "summary": "Check the health of the server",
+        "description": "Perform all health checks and return the server's health status.",
         "parameters": [],
         "responses": {
           "200": {
@@ -3923,7 +3991,7 @@
     "/api/server/environment": {
       "get": {
         "operationId": "ServerController_environment",
-        "summary": "Return the server environment",
+        "summary": "Get the server environment",
         "parameters": [
           {
             "name": "all",
@@ -3962,7 +4030,7 @@
     "/api/server/status": {
       "get": {
         "operationId": "ServerController_status",
-        "summary": "The server status",
+        "summary": "Get the server status",
         "parameters": [],
         "responses": {
           "200": {
@@ -4020,8 +4088,9 @@
     "/api/version": {
       "get": {
         "operationId": "VersionController_get",
-        "summary": "Get the version of the server",
+        "summary": "Get the server version ",
         "deprecated": true,
+        "description": "Use 'GET /api/server/version' instead ",
         "parameters": [],
         "responses": {
           "200": {
@@ -4520,99 +4589,6 @@
           "name"
         ]
       },
-      "WANumberExistResult": {
-        "type": "object",
-        "properties": {
-          "chatId": {
-            "type": "string",
-            "example": "Chat id for the phone number. Undefined if the number does not exist"
-          },
-          "numberExists": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "numberExists"
-        ]
-      },
-      "Contact": {
-        "type": "object",
-        "properties": {
-          "fullName": {
-            "type": "string",
-            "example": "John Doe",
-            "description": "The full name of the contact"
-          },
-          "organization": {
-            "type": "string",
-            "example": "Company Name",
-            "description": "The organization of the contact"
-          },
-          "phoneNumber": {
-            "type": "string",
-            "example": "+91 11111 11111",
-            "description": "The phone number of the contact"
-          },
-          "whatsappId": {
-            "type": "string",
-            "example": "911111111111",
-            "description": "The whatsapp id of the contact. DO NOT add + or @c.us"
-          },
-          "vcard": {
-            "type": "string",
-            "default": null
-          }
-        },
-        "required": [
-          "fullName",
-          "phoneNumber",
-          "vcard"
-        ]
-      },
-      "VCardContact": {
-        "type": "object",
-        "properties": {
-          "vcard": {
-            "type": "string",
-            "example": "BEGIN:VCARD\nVERSION:3.0\nFN:Jane Doe\nORG:Company Name;\nTEL;type=CELL;type=VOICE;waid=911111111111:+91 11111 11111\nEND:VCARD",
-            "description": "The vcard string"
-          }
-        },
-        "required": [
-          "vcard"
-        ]
-      },
-      "MessageContactVcardRequest": {
-        "type": "object",
-        "properties": {
-          "chatId": {
-            "type": "string",
-            "example": "11111111111@c.us"
-          },
-          "contacts": {
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/VCardContact"
-                },
-                {
-                  "$ref": "#/components/schemas/Contact"
-                }
-              ]
-            }
-          },
-          "session": {
-            "type": "string",
-            "default": "default"
-          }
-        },
-        "required": [
-          "chatId",
-          "contacts",
-          "session"
-        ]
-      },
       "MessageTextRequest": {
         "type": "object",
         "properties": {
@@ -4839,123 +4815,6 @@
           "mediaUrl",
           "ack",
           "ackName"
-        ]
-      },
-      "MessagePoll": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "How are you?"
-          },
-          "options": {
-            "example": [
-              "Awesome!",
-              "Good!",
-              "Not bad!"
-            ],
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "multipleAnswers": {
-            "type": "object",
-            "default": false
-          }
-        },
-        "required": [
-          "name",
-          "options",
-          "multipleAnswers"
-        ]
-      },
-      "MessagePollRequest": {
-        "type": "object",
-        "properties": {
-          "chatId": {
-            "type": "string",
-            "example": "11111111111@c.us"
-          },
-          "reply_to": {
-            "type": "string",
-            "description": "The ID of the message to reply to - false_11111111111@c.us_AAAAAAAAAAAAAAAAAAAA",
-            "example": null
-          },
-          "poll": {
-            "$ref": "#/components/schemas/MessagePoll"
-          },
-          "session": {
-            "type": "string",
-            "default": "default"
-          }
-        },
-        "required": [
-          "chatId",
-          "poll",
-          "session"
-        ]
-      },
-      "MessageLocationRequest": {
-        "type": "object",
-        "properties": {
-          "chatId": {
-            "type": "string",
-            "example": "11111111111@c.us"
-          },
-          "latitude": {
-            "type": "number",
-            "example": 38.8937255
-          },
-          "longitude": {
-            "type": "number",
-            "example": -77.0969763
-          },
-          "title": {
-            "type": "string",
-            "example": "Our office"
-          },
-          "reply_to": {
-            "type": "string",
-            "description": "The ID of the message to reply to - false_11111111111@c.us_AAAAAAAAAAAAAAAAAAAA",
-            "example": null
-          },
-          "session": {
-            "type": "string",
-            "default": "default"
-          }
-        },
-        "required": [
-          "chatId",
-          "latitude",
-          "longitude",
-          "title",
-          "session"
-        ]
-      },
-      "MessageLinkPreviewRequest": {
-        "type": "object",
-        "properties": {
-          "chatId": {
-            "type": "string",
-            "example": "11111111111@c.us"
-          },
-          "url": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "session": {
-            "type": "string",
-            "default": "default"
-          }
-        },
-        "required": [
-          "chatId",
-          "url",
-          "title",
-          "session"
         ]
       },
       "BinaryFile": {
@@ -5336,6 +5195,216 @@
           "session"
         ]
       },
+      "MessagePoll": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "How are you?"
+          },
+          "options": {
+            "example": [
+              "Awesome!",
+              "Good!",
+              "Not bad!"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "multipleAnswers": {
+            "type": "object",
+            "default": false
+          }
+        },
+        "required": [
+          "name",
+          "options",
+          "multipleAnswers"
+        ]
+      },
+      "MessagePollRequest": {
+        "type": "object",
+        "properties": {
+          "chatId": {
+            "type": "string",
+            "example": "11111111111@c.us"
+          },
+          "reply_to": {
+            "type": "string",
+            "description": "The ID of the message to reply to - false_11111111111@c.us_AAAAAAAAAAAAAAAAAAAA",
+            "example": null
+          },
+          "poll": {
+            "$ref": "#/components/schemas/MessagePoll"
+          },
+          "session": {
+            "type": "string",
+            "default": "default"
+          }
+        },
+        "required": [
+          "chatId",
+          "poll",
+          "session"
+        ]
+      },
+      "MessageLocationRequest": {
+        "type": "object",
+        "properties": {
+          "chatId": {
+            "type": "string",
+            "example": "11111111111@c.us"
+          },
+          "latitude": {
+            "type": "number",
+            "example": 38.8937255
+          },
+          "longitude": {
+            "type": "number",
+            "example": -77.0969763
+          },
+          "title": {
+            "type": "string",
+            "example": "Our office"
+          },
+          "reply_to": {
+            "type": "string",
+            "description": "The ID of the message to reply to - false_11111111111@c.us_AAAAAAAAAAAAAAAAAAAA",
+            "example": null
+          },
+          "session": {
+            "type": "string",
+            "default": "default"
+          }
+        },
+        "required": [
+          "chatId",
+          "latitude",
+          "longitude",
+          "title",
+          "session"
+        ]
+      },
+      "MessageLinkPreviewRequest": {
+        "type": "object",
+        "properties": {
+          "chatId": {
+            "type": "string",
+            "example": "11111111111@c.us"
+          },
+          "session": {
+            "type": "string",
+            "default": "default"
+          },
+          "url": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "chatId",
+          "session",
+          "url",
+          "title"
+        ]
+      },
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "example": "John Doe",
+            "description": "The full name of the contact"
+          },
+          "organization": {
+            "type": "string",
+            "example": "Company Name",
+            "description": "The organization of the contact"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "+91 11111 11111",
+            "description": "The phone number of the contact"
+          },
+          "whatsappId": {
+            "type": "string",
+            "example": "911111111111",
+            "description": "The whatsapp id of the contact. DO NOT add + or @c.us"
+          },
+          "vcard": {
+            "type": "string",
+            "default": null
+          }
+        },
+        "required": [
+          "fullName",
+          "phoneNumber",
+          "vcard"
+        ]
+      },
+      "VCardContact": {
+        "type": "object",
+        "properties": {
+          "vcard": {
+            "type": "string",
+            "example": "BEGIN:VCARD\nVERSION:3.0\nFN:Jane Doe\nORG:Company Name;\nTEL;type=CELL;type=VOICE;waid=911111111111:+91 11111 11111\nEND:VCARD",
+            "description": "The vcard string"
+          }
+        },
+        "required": [
+          "vcard"
+        ]
+      },
+      "MessageContactVcardRequest": {
+        "type": "object",
+        "properties": {
+          "chatId": {
+            "type": "string",
+            "example": "11111111111@c.us"
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/VCardContact"
+                },
+                {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              ]
+            }
+          },
+          "session": {
+            "type": "string",
+            "default": "default"
+          }
+        },
+        "required": [
+          "chatId",
+          "contacts",
+          "session"
+        ]
+      },
+      "WANumberExistResult": {
+        "type": "object",
+        "properties": {
+          "chatId": {
+            "type": "string",
+            "example": "Chat id for the phone number. Undefined if the number does not exist"
+          },
+          "numberExists": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "numberExists"
+        ]
+      },
       "MessageReplyRequest": {
         "type": "object",
         "properties": {
@@ -5383,6 +5452,11 @@
             "description": "Newsletter id",
             "example": "123123123123@newsletter"
           },
+          "name": {
+            "type": "string",
+            "description": "Channel name",
+            "example": "Channel Name"
+          },
           "invite": {
             "type": "string",
             "description": "Invite link",
@@ -5397,9 +5471,6 @@
             "type": "string",
             "description": "Channel's picture",
             "example": "https://mmg.whatsapp.net/m1/v/t24/An&_nc_cat=10"
-          },
-          "name": {
-            "type": "string"
           },
           "description": {
             "type": "string"
@@ -5419,8 +5490,8 @@
         },
         "required": [
           "id",
-          "invite",
           "name",
+          "invite",
           "verified",
           "role"
         ]
@@ -5465,15 +5536,15 @@
             ]
           },
           "text": {
-            "type": "object",
+            "type": "string",
             "default": "Have a look! https://github.com/"
           },
           "backgroundColor": {
-            "type": "object",
+            "type": "string",
             "default": "#38b42f"
           },
           "font": {
-            "type": "object",
+            "type": "number",
             "default": 1
           }
         },
@@ -5500,10 +5571,10 @@
           "file": {
             "oneOf": [
               {
-                "$ref": "#/components/schemas/BinaryFile"
+                "$ref": "#/components/schemas/RemoteFile"
               },
               {
-                "$ref": "#/components/schemas/RemoteFile"
+                "$ref": "#/components/schemas/BinaryFile"
               }
             ]
           },
@@ -5533,10 +5604,10 @@
           "file": {
             "oneOf": [
               {
-                "$ref": "#/components/schemas/VoiceBinaryFile"
+                "$ref": "#/components/schemas/VoiceRemoteFile"
               },
               {
-                "$ref": "#/components/schemas/VoiceRemoteFile"
+                "$ref": "#/components/schemas/VoiceBinaryFile"
               }
             ]
           },
@@ -5567,10 +5638,10 @@
           "file": {
             "oneOf": [
               {
-                "$ref": "#/components/schemas/BinaryFile"
+                "$ref": "#/components/schemas/VideoRemoteFile"
               },
               {
-                "$ref": "#/components/schemas/RemoteFile"
+                "$ref": "#/components/schemas/VideoBinaryFile"
               }
             ]
           },
@@ -5670,7 +5741,8 @@
         "type": "object",
         "properties": {
           "contactId": {
-            "type": "string"
+            "type": "string",
+            "example": "11111111111@c.us"
           },
           "session": {
             "type": "string",
