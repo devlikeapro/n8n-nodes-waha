@@ -22,7 +22,8 @@ function toResource(name: string) {
 	// keep only ascii, no emojis
 	return singular(name).replace(/[^a-zA-Z0-9]/g, '');
 }
-const HttpMethods: string[] = Object.values(OpenAPIV3.HttpMethods)
+
+const HttpMethods: string[] = Object.values(OpenAPIV3.HttpMethods);
 
 function sessionFirst(a: any, b: any) {
 	if (a.name === 'session') {
@@ -158,7 +159,10 @@ export class Parser {
 		}
 
 		let type: NodePropertyTypes;
-		let defaultValue = parameter.schema.default || parameter.schema.example;
+		let defaultValue = parameter.schema.default;
+		if (defaultValue === undefined) {
+			defaultValue = parameter.schema.example;
+		}
 		switch (schemaType) {
 			case 'boolean':
 				type = 'boolean';
@@ -174,11 +178,11 @@ export class Parser {
 				type = 'json';
 				defaultValue = defaultValue !== undefined ? defaultValue : '{}';
 				break;
-			case "array":
+			case 'array':
 				type = 'json';
 				defaultValue = defaultValue !== undefined ? defaultValue : '[]';
 				break;
-			case "number":
+			case 'number':
 				type = 'number';
 				defaultValue = defaultValue !== undefined ? defaultValue : 0;
 				break;
@@ -298,11 +302,11 @@ export class Parser {
 
 			// @ts-ignore
 			for ([method, operation] of Object.entries(pathItem)) {
-				if (!(HttpMethods.includes(method))) {
+				if (!HttpMethods.includes(method)) {
 					continue;
 				}
-				if (operation.deprecated){
-					continue
+				if (operation.deprecated) {
+					continue;
 				}
 				const tags = operation.tags;
 				if (!tags || tags.length === 0) {
