@@ -207,7 +207,7 @@ export class Parser {
 				break;
 			case 'array':
 				type = 'json';
-				defaultValue = defaultValue !== undefined ? defaultValue : '[]';
+				defaultValue = defaultValue !== undefined ? JSON.stringify(defaultValue, null, 2) : '[]';
 				break;
 			case 'number':
 				type = 'number';
