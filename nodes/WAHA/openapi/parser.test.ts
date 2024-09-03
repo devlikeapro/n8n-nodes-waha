@@ -25,12 +25,12 @@ test('query param', () => {
 
 	// @ts-ignore
 	const parser = new Parser({ paths });
-	const result = parser.parse('Entity', [
+	const result = parser.parse('Entity',
 		{
 			uri: '/api/entities',
 			method: 'get',
-		},
-	]);
+		}
+	);
 	expect(result).toEqual([
 		{
 			displayName: 'Operation',
@@ -107,12 +107,12 @@ test('path param', () => {
 	// @ts-ignore
 	const parser = new Parser({ paths });
 
-	const result = parser.parse('Entity', [
+	const result = parser.parse('Entity',
 		{
 			uri: '/api/entities/{entity}',
 			method: 'get',
-		},
-	]);
+		}
+	);
 	expect(result).toEqual([
 		{
 			displayName: 'Operation',
@@ -205,12 +205,12 @@ test('request body', () => {
 	// @ts-ignore
 	const parser = new Parser({ paths, components });
 
-	const result = parser.parse('Entity', [
+	const result = parser.parse('Entity',
 		{
 			uri: '/api/entities',
 			method: 'post',
 		},
-	]);
+	);
 	expect(result).toEqual([
 		{
 			displayName: 'Operation',

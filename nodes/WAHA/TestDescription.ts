@@ -1,6 +1,6 @@
 import { INodeProperties } from 'n8n-workflow/dist/Interfaces';
 
-export const AuthDescription: INodeProperties[] = [
+export const TestDescription: INodeProperties[] = [
 	{
 		displayName: 'Operation',
 		name: 'operation',

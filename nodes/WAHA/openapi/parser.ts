@@ -1,10 +1,10 @@
-import {INodeProperties, NodePropertyTypes} from 'n8n-workflow/dist/Interfaces';
+import { INodeProperties, NodePropertyTypes } from 'n8n-workflow/dist/Interfaces';
 import * as lodash from 'lodash';
-import {OpenAPIV3} from 'openapi-types';
+import { OpenAPIV3 } from 'openapi-types';
 
 interface Action {
 	uri: string;
-	method: "get" | "post" | "put" | "delete" | "patch";
+	method: 'get' | 'post' | 'put' | 'delete' | 'patch';
 }
 
 /**
@@ -13,9 +13,16 @@ interface Action {
 function replaceToParameter(uri: string): string {
 	return uri.replace(/{([^}]*)}/g, '{{$parameter["$1"]}}');
 }
-function singular(name: string){
+
+function singular(name: string) {
 	return name.replace(/s$/, '');
 }
+
+function toResource(name: string) {
+	// keep only ascii, no emojis
+	return singular(name).replace(/[^a-zA-Z0-9]/g, '');
+}
+const HttpMethods: string[] = Object.values(OpenAPIV3.HttpMethods)
 
 function sessionFirst(a: any, b: any) {
 	if (a.name === 'session') {
@@ -28,28 +35,35 @@ function sessionFirst(a: any, b: any) {
 }
 
 export class Parser {
+	public resourceNode?: INodeProperties;
+	public operations: INodeProperties[];
+	public fields: INodeProperties[];
+
+	private operationByResource: Map<string, any[]> = new Map();
+
 	constructor(private doc: OpenAPIV3.Document) {
+		this.operations = [];
+		this.fields = [];
 	}
 
-	get paths(): OpenAPIV3.PathsObject {
+	private get paths(): OpenAPIV3.PathsObject {
 		return this.doc.paths;
 	}
 
-	parse(resource: string, actions: Action[]): INodeProperties[] {
+	process() {
+		this.parseResources();
+		this.parseOperations();
+		this.postProcessOperations();
+	}
+
+	parse(resource: string, action: Action): INodeProperties[] {
 		const fieldNodes: any[] = [];
 		const options: any[] = [];
-		for (const action of actions) {
-			const ops: OpenAPIV3.PathItemObject = this.paths[action.uri]!!
-			const operation = ops[action.method as OpenAPIV3.HttpMethods]!!
-			const {option, fields} = this.parseOperation(
-				resource,
-				operation,
-				action.uri,
-				action.method,
-			);
-			options.push(option);
-			fieldNodes.push(...fields);
-		}
+		const ops: OpenAPIV3.PathItemObject = this.paths[action.uri]!!;
+		const operation = ops[action.method as OpenAPIV3.HttpMethods]!!;
+		const { option, fields } = this.parseOperation(resource, operation, action.uri, action.method);
+		options.push(option);
+		fieldNodes.push(...fields);
 
 		// eslint-disable-next-line
 		const operations = {
@@ -69,7 +83,12 @@ export class Parser {
 		return [operations, ...fieldNodes] as INodeProperties[];
 	}
 
-	parseOperation(resourceName: string, operation: OpenAPIV3.OperationObject, uri: string, method: string) {
+	parseOperation(
+		resourceName: string,
+		operation: OpenAPIV3.OperationObject,
+		uri: string,
+		method: string,
+	) {
 		const operationId = operation.operationId!!.split('_')[1];
 		const name = lodash.startCase(operationId);
 		const option = {
@@ -155,6 +174,14 @@ export class Parser {
 				type = 'json';
 				defaultValue = defaultValue !== undefined ? defaultValue : '{}';
 				break;
+			case "array":
+				type = 'json';
+				defaultValue = defaultValue !== undefined ? defaultValue : '[]';
+				break;
+			case "number":
+				type = 'number';
+				defaultValue = defaultValue !== undefined ? defaultValue : 0;
+				break;
 			default:
 				throw new Error(`Type '${schemaType}' not supported - '${name}'`);
 		}
@@ -235,30 +262,93 @@ export class Parser {
 			// @ts-ignore
 			schema = schema[path];
 		}
-		if ("$ref" in schema) {
-			return this.resolveRef(schema["$ref"]);
+		if ('$ref' in schema) {
+			return this.resolveRef(schema['$ref']);
 		}
 		return schema;
 	}
 
-	getResources(): INodeProperties {
-		const tags = this.doc.tags || []
+	parseResources() {
+		const tags = this.doc.tags || [];
 		const options = tags.map((tag) => {
-			const name = singular(tag.name)
+			const name = singular(tag.name);
 			return {
 				name: name,
-				// keep only ascii, no emojis
-				value: name.replace(/[^a-zA-Z0-9]/g, ''),
-				description: tag.description
+				value: toResource(name),
+				description: tag.description,
 			};
-		})
-		return {
+		});
+		this.resourceNode = {
 			displayName: 'Resource',
 			name: 'resource',
 			type: 'options',
 			noDataExpression: true,
 			options: options,
 			default: 'Chatting',
+		};
+	}
+
+	private parseOperations() {
+		let uri: string;
+		let pathItem: OpenAPIV3.PathItemObject;
+		// @ts-ignore
+		for ([uri, pathItem] of Object.entries(this.paths)) {
+			let method: string;
+			let operation: OpenAPIV3.OperationObject;
+
+			// @ts-ignore
+			for ([method, operation] of Object.entries(pathItem)) {
+				if (!(HttpMethods.includes(method))) {
+					continue;
+				}
+				if (operation.deprecated){
+					continue
+				}
+				const tags = operation.tags;
+				if (!tags || tags.length === 0) {
+					throw new Error(`No tags found for operation '${operation}'`);
+				}
+				const resourceName = toResource(tags[0]);
+				const { option, fields } = this.parseOperation(resourceName, operation, uri, method);
+				this.addOption(resourceName, option);
+				this.addFields(fields);
+			}
 		}
+	}
+
+	private postProcessOperations() {
+		for (const [resource, options] of this.operationByResource) {
+			// eslint-disable-next-line
+			const operation = {
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: [resource],
+					},
+				},
+				options: options,
+				default: options[0].value as string,
+			};
+			// @ts-ignore
+			this.addOperation(operation);
+		}
+	}
+
+	private addOption(resourceName: string, option: any) {
+		if (!this.operationByResource.has(resourceName)) {
+			this.operationByResource.set(resourceName, []);
+		}
+		this.operationByResource.get(resourceName)!!.push(option);
+	}
+
+	private addFields(fields: INodeProperties[]) {
+		this.fields.push(...fields);
+	}
+
+	private addOperation(operation: INodeProperties) {
+		this.operations.push(operation);
 	}
 }

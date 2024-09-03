@@ -1,9 +1,14 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
-import {SessionDescription} from './SessionDescription';
-import {AuthDescription} from "./AuthDescription";
-import {ChattingDescription} from "./ChattingDescription";
-import {ScreenshotFields, ScreenshotOperations} from "./ScreenshotDescription";
-import {parser} from "./openapiParser";
+import {TestDescription} from "./TestDescription";
+import * as doc from './openapi/openapi.json';
+import { Parser } from './openapi/parser';
+
+// @ts-ignore
+const parser = new Parser(doc);
+parser.process()
+const resourceNode = parser.resourceNode!!
+const operations = parser.operations
+const fields = parser.fields
 
 export class WAHANode implements INodeType {
 	description: INodeTypeDescription = {
@@ -33,12 +38,10 @@ export class WAHANode implements INodeType {
 			baseURL: '={{$credentials.url}}',
 		},
 		properties: [
-			parser.getResources(),
-			...SessionDescription,
-			...AuthDescription,
-			...ScreenshotOperations,
-			...ScreenshotFields,
-			...ChattingDescription,
+			resourceNode,
+			...operations,
+			...fields,
+			...TestDescription,
 		],
 	};
 }
