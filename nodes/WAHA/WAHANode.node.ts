@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import {INodeProperties, INodeType, INodeTypeDescription} from 'n8n-workflow';
 import {TestDescription} from "./TestDescription";
 import * as doc from './openapi/openapi.json';
 import { Parser } from './openapi/parser';
@@ -9,6 +9,21 @@ parser.process()
 const resourceNode = parser.resourceNode!!
 const operations = parser.operations
 const fields = parser.fields
+const additionalOperations: INodeProperties[] = []
+
+// Include test operations
+const includeTest = process.env.N8N_WAHA_MODE === "dev"
+if (includeTest){
+	const testOption = {
+		name: "🐛 Test",
+		value: "Test",
+		description: "Just for playing around with n8n",
+	}
+	resourceNode.default = "Test"
+	// insert at the start
+	resourceNode.options!!.unshift(testOption)
+	additionalOperations.push(...TestDescription)
+}
 
 export class WAHANode implements INodeType {
 	description: INodeTypeDescription = {
@@ -39,9 +54,9 @@ export class WAHANode implements INodeType {
 		},
 		properties: [
 			resourceNode,
+			...additionalOperations,
 			...operations,
 			...fields,
-			...TestDescription,
 		],
 	};
 }

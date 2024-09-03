@@ -8,15 +8,15 @@ export const TestDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
-				resource: ['Auth'],
+				resource: ['Test'],
 			},
 		},
 		options: [
 			{
-				name: 'Send Text',
-				value: 'Send Text',
-				action: 'Send a text message',
-				description: 'Send a text message',
+				name: 'Send Something',
+				value: 'Send Something',
+				action: 'Send a something message',
+				description: 'Send a something message',
 				routing: {
 					request: {
 						method: 'POST',
@@ -25,7 +25,7 @@ export const TestDescription: INodeProperties[] = [
 				},
 			},
 		],
-		default: 'Send Text',
+		default: 'Send Something',
 	},
 	{
 		displayName: 'Test',
@@ -36,10 +36,10 @@ export const TestDescription: INodeProperties[] = [
 		},
 		displayOptions: {
 			show: {
-				resource: ['Auth'],
+				resource: ['Test'],
 			},
 		},
-		default: 'Send Text',
+		default: 'Send Something',
 	},
 	{
 		displayName: 'Multi',
@@ -48,19 +48,19 @@ export const TestDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
-				resource: ['Auth'],
+				resource: ['Test'],
 			},
 		},
 		options: [
 			{
 				name: 'Option 1',
 				value: 'Option 1',
-				description: 'Send a text message',
+				description: 'Send a something message',
 			},
 			{
 				name: 'Option 2',
 				value: 'Option 2',
-				description: 'Send a text message',
+				description: 'Send a something message',
 			},
 		],
 		default: []
@@ -76,7 +76,7 @@ export const TestDescription: INodeProperties[] = [
 		},
 		displayOptions: {
 			show: {
-				resource: ['Auth']
+				resource: ['Test']
 			},
 		},
 		default: {},
