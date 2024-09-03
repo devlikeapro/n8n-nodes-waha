@@ -14,13 +14,9 @@ function replaceToParameter(uri: string): string {
 	return uri.replace(/{([^}]*)}/g, '{{$parameter["$1"]}}');
 }
 
-function singular(name: string) {
-	return name.replace(/s$/, '');
-}
-
 function toResource(name: string) {
 	// keep only ascii, no emojis
-	return singular(name).replace(/[^a-zA-Z0-9]/g, '');
+	return name.replace(/[^a-zA-Z0-9]/g, '');
 }
 
 const HttpMethods: string[] = Object.values(OpenAPIV3.HttpMethods);
@@ -277,7 +273,7 @@ export class Parser {
 	parseResources() {
 		const tags = this.doc.tags || [];
 		const options = tags.map((tag) => {
-			const name = singular(tag.name);
+			const name = tag.name;
 			return {
 				name: name,
 				value: toResource(name),
