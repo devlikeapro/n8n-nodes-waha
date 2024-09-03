@@ -86,7 +86,7 @@ export class Parser {
 		uri: string,
 		method: string,
 	) {
-		const operationId = operation.operationId!!.split('_').slice(1).join("_")
+		const operationId = operation.operationId!!.split('_').slice(1).join('_');
 		const name = lodash.startCase(operationId);
 		const option = {
 			name: name,
@@ -157,7 +157,7 @@ export class Parser {
 		let type: NodePropertyTypes;
 		let defaultValue = parameter.example;
 		if (defaultValue === undefined) {
-			defaultValue = this.extractExample(parameter.schema)
+			defaultValue = this.extractExample(parameter.schema);
 		}
 		switch (schemaType) {
 			case 'boolean':
@@ -167,7 +167,7 @@ export class Parser {
 			case 'string':
 			case undefined:
 				type = 'string';
-				defaultValue = defaultValue !== undefined ? defaultValue : 'string';
+				defaultValue = defaultValue !== undefined ? defaultValue : '';
 				break;
 			case 'object':
 			case 'json':
@@ -201,6 +201,18 @@ export class Parser {
 			// eslint-disable-next-line n8n-nodes-base/node-param-description-boolean-without-whether
 			description: parameter.description || parameter.schema.description,
 		};
+		if ('enum' in parameter.schema && schemaType === 'string') {
+			field.type = 'options';
+			field.options = parameter.schema.enum.map((value: string) => {
+				return {
+					name: lodash.startCase(value),
+					value: value,
+				};
+			});
+			// @ts-ignore
+			field.default = field.default ? field.default : field.options!![0].value;
+		}
+
 		return field;
 	}
 
@@ -212,8 +224,8 @@ export class Parser {
 		if (!requestBody) {
 			return [];
 		}
-		const requestBodyRef = requestBody.content['application/json'].schema['$ref'];
-		const requestSchema = this.resolveRef(requestBodyRef);
+		const requestBodySchema = requestBody.content['application/json'].schema;
+		const requestSchema = this.resolveSchema(requestBodySchema)
 		if (requestSchema.type != 'object') {
 			throw new Error(`Type '${requestSchema.type}' not supported`);
 		}
@@ -254,6 +266,13 @@ export class Parser {
 		return fields;
 	}
 
+	private resolveSchema(schema: any){
+		if ('$ref' in schema) {
+			return this.resolveRef(schema['$ref']);
+		}
+		return schema;
+	}
+
 	private resolveRef(ref: string): OpenAPIV3.SchemaObject {
 		const refPath = ref.split('/').slice(1);
 		let schema: any = this.doc;
@@ -261,7 +280,7 @@ export class Parser {
 			// @ts-ignore
 			schema = schema[path];
 		}
-		if (!schema){
+		if (!schema) {
 			throw new Error(`Schema not found for ref ${ref}`);
 		}
 		if ('$ref' in schema) {
@@ -343,7 +362,7 @@ export class Parser {
 		if (!this.operationByResource.has(resourceName)) {
 			this.operationByResource.set(resourceName, []);
 		}
-		const options = this.operationByResource.get(resourceName)!!
+		const options = this.operationByResource.get(resourceName)!!;
 		if (lodash.find(options, { value: option.value })) {
 			throw new Error(`Duplicate operation '${option.value}' for resource '${resourceName}'`);
 		}
@@ -367,10 +386,10 @@ export class Parser {
 		if ('$ref' in schema) {
 			return this.extractExample(this.resolveRef(schema['$ref']));
 		}
-		if ("oneOf" in schema) {
+		if ('oneOf' in schema) {
 			return this.extractExample(schema.oneOf!![0]);
 		}
-		if ("allOf" in schema) {
+		if ('allOf' in schema) {
 			const examples = schema.allOf!!.map((s) => this.extractExample(s));
 			return Object.assign({}, ...examples);
 		}
@@ -387,10 +406,9 @@ export class Parser {
 			}
 			return obj;
 		}
-		if ("items" in schema && schema.items) {
+		if ('items' in schema && schema.items) {
 			return [this.extractExample(schema.items)];
 		}
 		return undefined;
 	}
-
 }

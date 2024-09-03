@@ -306,3 +306,97 @@ test('request body', () => {
 		},
 	]);
 });
+
+test('enum schema' , () => {
+	const paths = {
+		'/api/entities': {
+			post: {
+				operationId: 'EntityController_create',
+				summary: 'Create entity',
+				requestBody: {
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									type: {
+										type: 'string',
+										enum: ['type1', 'type2'],
+									},
+								},
+								required: ['type'],
+							},
+						},
+					},
+				},
+				tags: ['🖥️ Tag'],
+			},
+		},
+	};
+
+	// @ts-ignore
+	const parser = new Parser({ paths });
+
+	const result = parser.parse('Entity', {
+		uri: '/api/entities',
+		method: 'post',
+	});
+	expect(result).toEqual([
+		{
+			displayName: 'Operation',
+			name: 'operation',
+			type: 'options',
+			noDataExpression: true,
+			displayOptions: {
+				show: {
+					resource: ['Entity'],
+				},
+			},
+			options: [
+				{
+					name: 'Create',
+					value: 'Create',
+					action: 'Create entity',
+					description: 'Create entity',
+					routing: {
+						request: {
+							method: 'POST',
+							url: '=/api/entities',
+						},
+					},
+				},
+			],
+			default: 'Create',
+		},
+		{
+			displayName: 'Type',
+			name: 'type',
+			type: 'options',
+			default: "type1",
+			required: true,
+			options: [
+				{
+					name: 'Type 1',
+					value: 'type1',
+				},
+				{
+					name: 'Type 2',
+					value: 'type2',
+				},
+			],
+			displayOptions: {
+				show: {
+					resource: ['Entity'],
+					operation: ['Create'],
+				},
+			},
+			routing: {
+				request: {
+					body: {
+						type: '={{ $value }}',
+					},
+				},
+			},
+		},
+	]);
+})
