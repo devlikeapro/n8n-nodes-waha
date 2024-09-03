@@ -34,8 +34,8 @@ export class WAHAApi implements ICredentialType {
     };
     test: ICredentialTestRequest = {
         request: {
-            baseURL: '={{$credentials.url}}/api',
-            url: '/sessions',
+						baseURL: '={{$credentials.url}}',
+            url: '/api/sessions',
         },
     };
 }
