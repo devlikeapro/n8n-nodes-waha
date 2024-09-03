@@ -366,6 +366,13 @@ export class Parser {
 		if ('$ref' in schema) {
 			return this.extractExample(this.resolveRef(schema['$ref']));
 		}
+		if ("oneOf" in schema) {
+			return this.extractExample(schema.oneOf!![0]);
+		}
+		if ("allOf" in schema) {
+			const examples = schema.allOf!!.map((s) => this.extractExample(s));
+			return Object.assign({}, ...examples);
+		}
 		if (schema.example !== undefined) {
 			return schema.example;
 		}
