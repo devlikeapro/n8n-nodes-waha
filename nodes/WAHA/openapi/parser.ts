@@ -91,7 +91,7 @@ export class Parser {
 		const option = {
 			name: name,
 			value: name,
-			action: operation.summary,
+			action: operation.summary || name,
 			description: operation.description || operation.summary,
 			routing: {
 				request: {
