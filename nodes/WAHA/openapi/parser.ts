@@ -90,7 +90,7 @@ export class Parser {
 		uri: string,
 		method: string,
 	) {
-		const operationId = operation.operationId!!.split('_')[1];
+		const operationId = operation.operationId!!.split('_').slice(1).join("_")
 		const name = lodash.startCase(operationId);
 		const option = {
 			name: name,
@@ -219,7 +219,7 @@ export class Parser {
 		const requestBodyRef = requestBody.content['application/json'].schema['$ref'];
 		const requestSchema = this.resolveRef(requestBodyRef);
 		if (requestSchema.type != 'object') {
-			throw new Error(`Type ${requestSchema.type} not supported`);
+			throw new Error(`Type '${requestSchema.type}' not supported`);
 		}
 		const properties = requestSchema.properties;
 		const fields = [];
@@ -347,7 +347,12 @@ export class Parser {
 		if (!this.operationByResource.has(resourceName)) {
 			this.operationByResource.set(resourceName, []);
 		}
-		this.operationByResource.get(resourceName)!!.push(option);
+		const options = this.operationByResource.get(resourceName)!!
+		if (lodash.find(options, { value: option.value })) {
+			throw new Error(`Duplicate operation '${option.value}' for resource '${resourceName}'`);
+		}
+
+		options.push(option);
 	}
 
 	private addFields(fields: INodeProperties[]) {
