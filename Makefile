@@ -9,8 +9,12 @@ link:
 start:
 	cd ~/.n8n/custom && npm link n8n-nodes-waha && n8n start
 
+tests:
+	npm run test
+
 dev:
 	make clean
+	make tests
 	make build
 	make link
 	make start
