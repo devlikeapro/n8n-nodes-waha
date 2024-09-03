@@ -4298,7 +4298,8 @@
           "enabled": {
             "type": "boolean",
             "default": false,
-            "description": "Enable or disable the store for contacts, chats, and messages."
+            "description": "Enable or disable the store for contacts, chats, and messages.",
+            "example": true
           },
           "fullSync": {
             "type": "boolean",
