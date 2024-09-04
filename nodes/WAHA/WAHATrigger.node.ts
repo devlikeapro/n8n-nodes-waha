@@ -31,7 +31,6 @@ const outputNames = options.map((option) => option.value);
  */
 function note(): string {
 	const parts = ["<b>Events</b>:"]
-	parts.push("")
 	for (const event of events) {
 		parts.push(`- ${event}`)
 	}
