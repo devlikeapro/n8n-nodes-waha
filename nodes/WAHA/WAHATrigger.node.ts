@@ -26,6 +26,18 @@ const options = events.map((event) => {
 const outputs = options.map((_) => 'main');
 const outputNames = options.map((option) => option.value);
 
+/**
+ * Construct html ul li
+ */
+function note(): string {
+	const parts = ["<b>Events</b>:"]
+	parts.push("")
+	for (const event of events) {
+		parts.push(`- ${event}`)
+	}
+	return parts.join("<br>")
+}
+
 export class WAHATrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'WAHA Trigger',
@@ -49,7 +61,26 @@ export class WAHATrigger implements INodeType {
 				path: 'waha',
 			},
 		],
-		properties: [],
+		properties: [
+			{
+				displayName: "Remember to configure WAHA instance (session or server) to send events to <b>Webhook URL</b>",
+				name: 'operation',
+				type: 'notice',
+				typeOptions: {
+					theme: 'info',
+				},
+				default: '',
+			},
+		{
+			displayName: note(),
+			name: 'operation',
+			type: 'notice',
+			typeOptions: {
+				theme: 'info',
+			},
+			default: '',
+		}
+		]
 	};
 
 	async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
