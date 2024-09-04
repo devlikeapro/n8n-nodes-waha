@@ -44,6 +44,17 @@ export class WAHATrigger implements INodeType {
 						value: '*',
 						description: 'Any time any event is triggered (Wildcard Event)',
 					},
+					{
+						name: 'session.status',
+						value: 'session.status',
+						description: 'When a session status changes',
+					},
+					{
+						// eslint-disable-next-line n8n-nodes-base/node-param-display-name-miscased
+						name: 'message',
+						value: 'message',
+						description: 'When a message is received',
+					},
 				],
 			},
 		],
@@ -55,7 +66,7 @@ export class WAHATrigger implements INodeType {
 
 		const events = this.getNodeParameter('events', []) as string[];
 
-		const eventType = bodyData.type as string | undefined;
+		const eventType = bodyData.event as string | undefined;
 
 		if (eventType === undefined || (!events.includes('*') && !events.includes(eventType))) {
 			// If not eventType is defined or when one is defined, but we are not
