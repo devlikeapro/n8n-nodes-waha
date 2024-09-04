@@ -62,7 +62,8 @@ export class WAHATrigger implements INodeType {
 		],
 		properties: [
 			{
-				displayName: "Remember to configure WAHA instance (session or server) to send events to <b>Webhook URL</b>",
+				displayName: "Remember to configure WAHA instance (session or server) to send events to <b>Webhook URL</b>. " +
+					"<br/>Check <b>Docs</b> link above☝️",
 				name: 'operation',
 				type: 'notice',
 				typeOptions: {
