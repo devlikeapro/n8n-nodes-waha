@@ -1,0 +1,1029 @@
+{
+  "name": "WAHA - Workflow Examples",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "Auth",
+        "operation": "Get QR",
+        "session": "={{ $json.session }}",
+        "requestOptions": {}
+      },
+      "id": "471c365a-c50e-464a-9df1-80604b16ecc6",
+      "name": "WAHA",
+      "type": "CUSTOM.WAHANode",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        720
+      ],
+      "credentials": {
+        "wahaApi": {
+          "id": "lr8XPgOc8BRmjjKQ",
+          "name": "localhost:3000"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "data",
+        "binaryPropertyName": "screenshot",
+        "options": {
+          "mimeType": "={{ $json['mimetype'] }}"
+        }
+      },
+      "id": "000f1c9b-86a7-4fed-bf8e-21502134d536",
+      "name": "Convert to File",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        2040,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "f827f7f8-d40c-4d97-9677-9e62d99c7e7a",
+              "leftValue": "={{ $json.payload.status }}",
+              "rightValue": "SCAN_QR_CODE",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "45d7f11d-0542-411e-9130-ed3f2e973ab3",
+      "name": "status=SCAN_QR_CODE",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        1500,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "92ee6e06-2f59-428f-b635-67c935d56284",
+              "name": "session",
+              "value": "={{ $json.session }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "753f9ee3-e429-4af3-935b-bac3d2f09575",
+      "name": "Session",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1700,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "waha-qr-webhooks",
+        "options": {}
+      },
+      "id": "b3231eef-d18f-4a5d-83e5-b1d979174ccf",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        160,
+        1200
+      ],
+      "webhookId": "b7453a5b-c133-40d1-a221-870b3ef3d8d0"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Execution\nIf you want to manually test the workflow with specific `session` - remove connection from **WAHA Webhook** to **Session** node and connect it to \"**Manual Trigger**\"",
+        "height": 351.87272727272716,
+        "width": 554.0231729055259
+      },
+      "id": "d8ef43e9-6e1c-46b5-bafb-23f21a65721b",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        120,
+        640
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "62540b04-9968-43f5-8876-eb9b5f5771ca",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        160,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"session\": \"default2\"\n}\n",
+        "options": {}
+      },
+      "id": "c9a2068a-f9cd-47ac-b310-9376e6d3ce8d",
+      "name": "Set Session name",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        500,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ $json.body }}",
+        "options": {}
+      },
+      "id": "94fa7e47-da64-4889-a87d-c1ad1b1f8a50",
+      "name": "Extract Event",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## WAHA Webhook",
+        "height": 629.9407047373624,
+        "width": 327.12752630406015,
+        "color": 6
+      },
+      "id": "1f1ad0ec-6415-4e28-adc0-bc9611220567",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        840,
+        940
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Send QR to Email",
+        "height": 436.00729838273105,
+        "width": 973.2347646532487,
+        "color": 4
+      },
+      "id": "cd31208e-a79c-401a-9682-4af9a3797b2a",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        640
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "be4379fb-bbd6-44bb-8b8a-426666d959d4",
+      "name": "WAHA Trigger",
+      "type": "CUSTOM.wahaTrigger",
+      "typeVersion": 1,
+      "position": [
+        920,
+        1000
+      ],
+      "webhookId": "71251449-2644-4325-8ba7-2a1550a81fb4"
+    },
+    {
+      "parameters": {
+        "fromEmail": "portal@devlike.pro",
+        "toEmail": "waha@devlike.pro",
+        "subject": "=WAHA [{{ $('Session').item.json.session }}] - Your QR code to authorize WhatsApp ",
+        "html": "Kindly scan it ASAP:\n<br><br>\n<img src=\"cid:screenshot\">",
+        "options": {
+          "attachments": "screenshot"
+        }
+      },
+      "id": "32db5eb3-8168-4bb7-93e9-16e604974efb",
+      "name": "Send QR Code",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        2220,
+        720
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "t8VNNjZP3ojh8sWM",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "portal@devlike.pro",
+        "toEmail": "waha@devlike.pro",
+        "subject": "=WAHA [{{ $json.session }}] - You have new message in WhatsApp! ",
+        "html": "=From: {{ $json.payload.from }}\n<br>\nTo: {{ $json.payload.to || $json.me.id }}\n<br>\nText: {{ $json.payload.body }}",
+        "options": {}
+      },
+      "id": "00d26b94-60f1-4b38-b6d1-92288bcc7d23",
+      "name": "Send Text Message",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1540,
+        2740
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "t8VNNjZP3ojh8sWM",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Send Text to Email",
+        "height": 320.11218397325257,
+        "width": 313.52411339929284,
+        "color": 4
+      },
+      "id": "010d80ec-b83e-433b-aa5c-784779bbb9fa",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        2640
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.event }}",
+                    "rightValue": "session.status",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "session.status"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "a7b7b1ea-7575-416f-87f3-c4f799c16de0",
+                    "leftValue": "{{ $json.event }}",
+                    "rightValue": "message",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "message"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6f11731c-27d7-4505-8aba-ca851fb460c6",
+      "name": "Listen for Events",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.1,
+      "position": [
+        460,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Webhook Shortcut\n**WAHA Webhook**  is basically a shortcut for  operations:\n\n1. Webhook handler\n2. Extract **body** from the POST request\n3. Filter events based on `event` ",
+        "height": 351.87272727272716,
+        "width": 558.3138303449722
+      },
+      "id": "063b31d4-2bc2-4432-afa1-dabe1c2210b9",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        120,
+        1020
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "ed8e0ac0-c022-4d9d-affb-4dec5ae95772",
+      "name": "Do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Reply on \"ping\"",
+        "height": 339.6993458980035,
+        "width": 568.1572184210546,
+        "color": 4
+      },
+      "id": "79b019bc-781a-4624-b4cb-e242ea929186",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        1520
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "f827f7f8-d40c-4d97-9677-9e62d99c7e7a",
+              "leftValue": "={{ $json.payload.body }}",
+              "rightValue": "ping",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "9dc60cdc-5d7b-44ab-b959-3cec77632855",
+              "leftValue": "={{ $json.payload.body }}",
+              "rightValue": "Ping",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "fb56db9d-c80c-4cfe-a7ab-b138a1a57ba2",
+      "name": "body=ping",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        1520,
+        1640
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "7d36b8a5-23cd-45c6-8915-6a4d29df3a57",
+      "name": "Do nothing1",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1800,
+        1720
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "Send Text",
+        "session": "={{ $json.session }}",
+        "chatId": "={{ $json.payload.from }}",
+        "reply_to": "",
+        "text": "pong",
+        "requestOptions": {}
+      },
+      "id": "5ee4c861-fdb9-4ccf-b5a8-18e10e70b31d",
+      "name": "Send \"pong\"",
+      "type": "CUSTOM.WAHANode",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        1560
+      ],
+      "credentials": {
+        "wahaApi": {
+          "id": "lr8XPgOc8BRmjjKQ",
+          "name": "localhost:3000"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "Send Seen",
+        "session": "={{ $json.session }}",
+        "chatId": "={{ $json.payload.from }}",
+        "messageId": "={{ $json.payload.id }}",
+        "participant": "",
+        "requestOptions": {}
+      },
+      "id": "b804af78-6ea2-4a88-b893-9d5de8c51ce6",
+      "name": "Send Seen",
+      "type": "CUSTOM.WAHANode",
+      "typeVersion": 2,
+      "position": [
+        1720,
+        1220
+      ],
+      "credentials": {
+        "wahaApi": {
+          "id": "lr8XPgOc8BRmjjKQ",
+          "name": "localhost:3000"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Always Send Seen",
+        "height": 339.6993458980035,
+        "width": 568.1572184210546,
+        "color": 4
+      },
+      "id": "b96ec014-9bc4-4d1a-9e52-b1221e469239",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Send Image on \"image\"",
+        "height": 339.6993458980035,
+        "width": 568.1572184210546,
+        "color": 4
+      },
+      "id": "1dbd4200-a7fd-4125-a796-e0df2615a921",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        1880
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "f827f7f8-d40c-4d97-9677-9e62d99c7e7a",
+              "leftValue": "={{ $json.payload.body }}",
+              "rightValue": "image",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "9dc60cdc-5d7b-44ab-b959-3cec77632855",
+              "leftValue": "={{ $json.payload.body }}",
+              "rightValue": "Image",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "9b8b2bd6-1188-4a0d-b9b5-7e77006d5cae",
+      "name": "body=image",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        1520,
+        2020
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "Send Image",
+        "session": "={{ $json.session }}",
+        "chatId": "={{ $json.payload.from }}",
+        "reply_to": "",
+        "caption": "Check this!",
+        "requestOptions": {}
+      },
+      "id": "9e7cf9ed-0578-4301-a7d6-4fe93bddd1f3",
+      "name": "WAHA1",
+      "type": "CUSTOM.WAHANode",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        2000
+      ],
+      "credentials": {
+        "wahaApi": {
+          "id": "lr8XPgOc8BRmjjKQ",
+          "name": "localhost:3000"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Send Video via HTTP Request on \"video\"",
+        "height": 339.6993458980035,
+        "width": 568.1572184210546,
+        "color": 4
+      },
+      "id": "653344bb-c205-42fe-bab3-00fb27223cb9",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        2260
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "true",
+                    "rightValue": "true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "242f1ea8-0d3f-491c-a60b-1ac78c82488f",
+                    "leftValue": "true",
+                    "rightValue": "true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "4f550e8f-c7d2-4c22-8fbb-f729816db6b7",
+                    "leftValue": "1",
+                    "rightValue": "1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "da0bc918-b215-4420-9d18-3aab622a3679",
+                    "leftValue": "1",
+                    "rightValue": "1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "5adefefb-8710-4a58-acce-c7b80d749de8",
+                    "leftValue": "1",
+                    "rightValue": "1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "id": "eece06f9-badd-4906-996e-a7365e6c01e8",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.1,
+      "position": [
+        1200,
+        1480
+      ],
+      "alwaysOutputData": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:3000/api/sendVideo",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "wahaApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"session\": \"{{ $json.session }}\",\n  \"chatId\": \"{{ $json.payload.from }}\",\n  \"caption\": \"Watch this video!\",\n  \"file\": {\n    \"mimetype\": \"video/mp4\",\n    \"filename\": \"video.mp4\",\n    \"url\": \"https://github.com/devlikeapro/waha/raw/core/examples/video.mp4\"\n  }\n}",
+        "options": {}
+      },
+      "id": "6e279d23-c7ce-415f-baa8-88009adfb9f5",
+      "name": "HTTP Request - WAHA Send Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1780,
+        2360
+      ],
+      "credentials": {
+        "wahaApi": {
+          "id": "lr8XPgOc8BRmjjKQ",
+          "name": "localhost:3000"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "f827f7f8-d40c-4d97-9677-9e62d99c7e7a",
+              "leftValue": "={{ $json.payload.body }}",
+              "rightValue": "video",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "9dc60cdc-5d7b-44ab-b959-3cec77632855",
+              "leftValue": "={{ $json.payload.body }}",
+              "rightValue": "Video",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "ba7c997f-6e3a-4d0d-a5cc-ae5a5346f22c",
+      "name": "body=video",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        1520,
+        2380
+      ]
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "content-type": "application/json",
+            "host": "localhost:5678",
+            "content-length": "267",
+            "connection": "keep-alive"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "session.status",
+            "session": "default2",
+            "metadata": {
+              "user.id": "123"
+            },
+            "me": null,
+            "payload": {
+              "name": "default2",
+              "status": "SCAN_QR_CODE"
+            },
+            "engine": "WEBJS",
+            "environment": {
+              "version": "2024.9.3",
+              "engine": "WEBJS",
+              "tier": "PLUS",
+              "browser": "/usr/bin/google-chrome-stable"
+            }
+          },
+          "webhookUrl": "http://localhost:5678/webhook-test/waha-qr-webhooks",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "WAHA": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Send QR Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "status=SCAN_QR_CODE": {
+      "main": [
+        [
+          {
+            "node": "Session",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Session": {
+      "main": [
+        [
+          {
+            "node": "WAHA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extract Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Session name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Event": {
+      "main": [
+        [
+          {
+            "node": "Listen for Events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WAHA Trigger": {
+      "main": [
+        [
+          {
+            "node": "status=SCAN_QR_CODE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "body=ping": {
+      "main": [
+        [
+          {
+            "node": "Send \"pong\"",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "body=image": {
+      "main": [
+        [
+          {
+            "node": "WAHA1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Send Seen",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "body=ping",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Text Message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "body=image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "body=video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "body=video": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request - WAHA Send Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "42d7f766-2298-471a-bec5-857b3f4ebb7b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0e772b34be7cf831879a67eab902d1a82e196ca383b0aa03f58b34f1545d701e"
+  },
+  "id": "5ziVavOMiiCJHgqD",
+  "tags": []
+}
