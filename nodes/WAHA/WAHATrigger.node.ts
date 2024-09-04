@@ -1,11 +1,43 @@
 import type {
 	IDataObject,
-	IWebhookFunctions,
+	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
+	IWebhookFunctions,
 	IWebhookResponseData,
 } from 'n8n-workflow';
 
+const events = [
+	'session.status',
+	'message',
+	'message.reaction',
+	'message.any',
+	'message.ack',
+	'message.revoked',
+	'state.change',
+	'group.join',
+	'group.leave',
+	'presence.update',
+	'poll.vote',
+	'poll.vote.failed',
+	'chat.archive',
+	'call.received',
+	'call.accepted',
+	'call.rejected',
+	'label.upsert',
+	'label.deleted',
+	'label.chat.added',
+	'label.chat.deleted',
+];
+
+const options = events.map((event) => {
+	return {
+		name: event,
+		value: event,
+	};
+});
+const outputs = options.map((_) => 'main');
+const outputNames = options.map((option) => option.value);
 
 export class WAHATrigger implements INodeType {
 	description: INodeTypeDescription = {
@@ -19,8 +51,9 @@ export class WAHATrigger implements INodeType {
 			name: 'WAHA Trigger',
 		},
 		inputs: [],
-		outputs: ["main"],
-		credentials: [ ],
+		outputs: outputs,
+		outputNames: outputNames,
+		credentials: [],
 		webhooks: [
 			{
 				name: 'default',
@@ -29,53 +62,29 @@ export class WAHATrigger implements INodeType {
 				path: 'webhook',
 			},
 		],
-		properties: [
-			{
-				displayName: 'Events',
-				name: 'events',
-				type: 'multiOptions',
-				required: true,
-				default: [],
-				description: 'The event to listen to',
-				// eslint-disable-next-line n8n-nodes-base/node-param-multi-options-type-unsorted-items
-				options: [
-					{
-						name: '*',
-						value: '*',
-						description: 'Any time any event is triggered (Wildcard Event)',
-					},
-					{
-						name: 'session.status',
-						value: 'session.status',
-						description: 'When a session status changes',
-					},
-					{
-						// eslint-disable-next-line n8n-nodes-base/node-param-display-name-miscased
-						name: 'message',
-						value: 'message',
-						description: 'When a message is received',
-					},
-				],
-			},
-		],
+		properties: [],
 	};
 
 	async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
 		const bodyData = this.getBodyData();
-		const req = this.getRequestObject();
-
-		const events = this.getNodeParameter('events', []) as string[];
 
 		const eventType = bodyData.event as string | undefined;
 
-		if (eventType === undefined || (!events.includes('*') && !events.includes(eventType))) {
+		if (eventType === undefined || !events.includes(eventType)) {
 			// If not eventType is defined or when one is defined, but we are not
 			// listening to it do not start the workflow.
 			return {};
 		}
+		const eventIndex: number = events.indexOf(eventType);
+		const req = this.getRequestObject();
+
+		const data = this.helpers.returnJsonArray(req.body as IDataObject);
+		const empty: INodeExecutionData[] = [];
+		const workflowData = events.map((_) => empty);
+		workflowData[eventIndex] = data;
 
 		return {
-			workflowData: [this.helpers.returnJsonArray(req.body as IDataObject)],
+			workflowData: workflowData,
 		};
 	}
 }
