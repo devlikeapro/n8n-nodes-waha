@@ -7,29 +7,16 @@ import type {
 	IWebhookResponseData,
 } from 'n8n-workflow';
 
-const events = [
-	'session.status',
-	'message',
-	'message.reaction',
-	'message.any',
-	'message.ack',
-	'message.revoked',
-	'state.change',
-	'group.join',
-	'group.leave',
-	'presence.update',
-	'poll.vote',
-	'poll.vote.failed',
-	'chat.archive',
-	'call.received',
-	'call.accepted',
-	'call.rejected',
-	'label.upsert',
-	'label.deleted',
-	'label.chat.added',
-	'label.chat.deleted',
-];
+import * as doc from './openapi/openapi.json';
 
+function getEvents() {
+	const schemas = doc.components.schemas;
+	const schema = schemas.WAHAWebhookSessionStatus;
+	const event = schema.properties.event;
+	return event.enum;
+}
+
+const events = getEvents()
 const options = events.map((event) => {
 	return {
 		name: event,
