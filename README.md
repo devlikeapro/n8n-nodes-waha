@@ -7,6 +7,14 @@ It lets you use [WAHA - WhatsApp HTTP API](https://waha.devlike.pro) in your n8n
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
+- [Installation](#installation)
+  - [Install WAHA](#install-waha)
+  - [Install n8n](#install-n8n)
+  - [Install WAHA node](#install-waha-node)
+- [Credentials](#credentials)
+- [Usage](#usage)
+- [Workflow Examples](#workflow-examples)
+
 ## Installation
 
 ### Install WAHA
@@ -41,7 +49,7 @@ of the n8n window and selecting **Import from URL**.
 4. Paste the url
 
 
-### Workflow Examples
+## Workflow Examples
 [WAHA - Workflow Example](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Workflow_Examples.json) 
 - Mark message as seen
 - Send "pong" on "Ping"
