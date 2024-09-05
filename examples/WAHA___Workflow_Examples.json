@@ -3,27 +3,6 @@
   "nodes": [
     {
       "parameters": {
-        "resource": "Auth",
-        "operation": "Get QR",
-        "requestOptions": {}
-      },
-      "id": "471c365a-c50e-464a-9df1-80604b16ecc6",
-      "name": "WAHA",
-      "type": "CUSTOM.WAHANode",
-      "typeVersion": 2,
-      "position": [
-        1880,
-        720
-      ],
-      "credentials": {
-        "wahaApi": {
-          "id": "lr8XPgOc8BRmjjKQ",
-          "name": "localhost:3000"
-        }
-      }
-    },
-    {
-      "parameters": {
         "operation": "toBinary",
         "sourceProperty": "data",
         "binaryPropertyName": "screenshot",
@@ -554,28 +533,6 @@
     },
     {
       "parameters": {
-        "resource": "Chatting",
-        "operation": "Send Image",
-        "caption": "Check this",
-        "requestOptions": {}
-      },
-      "id": "9e7cf9ed-0578-4301-a7d6-4fe93bddd1f3",
-      "name": "WAHA1",
-      "type": "CUSTOM.WAHANode",
-      "typeVersion": 2,
-      "position": [
-        1800,
-        2000
-      ],
-      "credentials": {
-        "wahaApi": {
-          "id": "lr8XPgOc8BRmjjKQ",
-          "name": "localhost:3000"
-        }
-      }
-    },
-    {
-      "parameters": {
         "content": "## Send Video via HTTP Request on \"video\"",
         "height": 339.6993458980035,
         "width": 568.1572184210546,
@@ -786,6 +743,49 @@
         1520,
         2380
       ]
+    },
+    {
+      "parameters": {
+        "resource": "Auth",
+        "operation": "Get QR",
+        "requestOptions": {}
+      },
+      "id": "471c365a-c50e-464a-9df1-80604b16ecc6",
+      "name": "Get QR",
+      "type": "CUSTOM.WAHANode",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        720
+      ],
+      "credentials": {
+        "wahaApi": {
+          "id": "lr8XPgOc8BRmjjKQ",
+          "name": "localhost:3000"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "Chatting",
+        "operation": "Send Image",
+        "caption": "Check this",
+        "requestOptions": {}
+      },
+      "id": "9e7cf9ed-0578-4301-a7d6-4fe93bddd1f3",
+      "name": "Send Image",
+      "type": "CUSTOM.WAHANode",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        2000
+      ],
+      "credentials": {
+        "wahaApi": {
+          "id": "lr8XPgOc8BRmjjKQ",
+          "name": "localhost:3000"
+        }
+      }
     }
   ],
   "pinData": {
@@ -826,17 +826,6 @@
     ]
   },
   "connections": {
-    "WAHA": {
-      "main": [
-        [
-          {
-            "node": "Convert to File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Convert to File": {
       "main": [
         [
@@ -870,7 +859,7 @@
       "main": [
         [
           {
-            "node": "WAHA",
+            "node": "Get QR",
             "type": "main",
             "index": 0
           }
@@ -950,7 +939,7 @@
       "main": [
         [
           {
-            "node": "WAHA1",
+            "node": "Send Image",
             "type": "main",
             "index": 0
           }
@@ -1006,13 +995,24 @@
           }
         ]
       ]
+    },
+    "Get QR": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "744bfe1e-2ec1-425f-a80d-2eb9b2875889",
+  "versionId": "e4a6a32a-ea9f-4917-a72f-5b08fc82d3f3",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "0e772b34be7cf831879a67eab902d1a82e196ca383b0aa03f58b34f1545d701e"
