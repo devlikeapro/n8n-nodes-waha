@@ -5,7 +5,6 @@
       "parameters": {
         "resource": "Auth",
         "operation": "Get QR",
-        "session": "={{ $json.session }}",
         "requestOptions": {}
       },
       "id": "471c365a-c50e-464a-9df1-80604b16ecc6",
@@ -342,7 +341,7 @@
     },
     {
       "parameters": {
-        "content": "## Webhook Shortcut\n**WAHA Webhook**  is basically a shortcut for  operations:\n\n1. Webhook handler\n2. Extract **body** from the POST request\n3. Filter events based on `event` ",
+        "content": "## Webhook Shortcut\n**WAHA Webhook** node is basically a shortcut for  operations:\n\n1. Webhook handler\n2. Extract **body** from the POST request\n3. Filter events based on `event` ",
         "height": 351.87272727272716,
         "width": 558.3138303449722
       },
@@ -437,10 +436,8 @@
     },
     {
       "parameters": {
+        "resource": "Chatting",
         "operation": "Send Text",
-        "session": "={{ $json.session }}",
-        "chatId": "={{ $json.payload.from }}",
-        "reply_to": "",
         "text": "pong",
         "requestOptions": {}
       },
@@ -461,10 +458,8 @@
     },
     {
       "parameters": {
+        "resource": "Chatting",
         "operation": "Send Seen",
-        "session": "={{ $json.session }}",
-        "chatId": "={{ $json.payload.from }}",
-        "messageId": "={{ $json.payload.id }}",
         "participant": "",
         "requestOptions": {}
       },
@@ -559,11 +554,9 @@
     },
     {
       "parameters": {
+        "resource": "Chatting",
         "operation": "Send Image",
-        "session": "={{ $json.session }}",
-        "chatId": "={{ $json.payload.from }}",
-        "reply_to": "",
-        "caption": "Check this!",
+        "caption": "Check this",
         "requestOptions": {}
       },
       "id": "9e7cf9ed-0578-4301-a7d6-4fe93bddd1f3",
@@ -1019,7 +1012,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "42d7f766-2298-471a-bec5-857b3f4ebb7b",
+  "versionId": "744bfe1e-2ec1-425f-a80d-2eb9b2875889",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "0e772b34be7cf831879a67eab902d1a82e196ca383b0aa03f58b34f1545d701e"
