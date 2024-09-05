@@ -28,6 +28,17 @@ export const TestDescription: INodeProperties[] = [
 		default: 'Send Something',
 	},
 	{
+		displayName: 'Variable',
+		name: 'variable',
+		type: 'string',
+		displayOptions: {
+			show: {
+				resource: ['Test'],
+			},
+		},
+		default: '={{ $json.session }}',
+	},
+	{
 		displayName: 'Test',
 		name: 'operation',
 		type: 'notice',

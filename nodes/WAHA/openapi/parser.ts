@@ -83,7 +83,7 @@ export class Parser {
 				},
 			},
 			options: options,
-			default: options[0].value as string,
+			default: "",
 		};
 
 		return [operations, ...fieldNodes] as INodeProperties[];
@@ -336,7 +336,7 @@ export class Parser {
 			type: 'options',
 			noDataExpression: true,
 			options: options,
-			default: 'Chatting',
+			default: '',
 		};
 	}
 
@@ -382,7 +382,7 @@ export class Parser {
 					},
 				},
 				options: options,
-				default: options[0].value as string,
+				default: "",
 			};
 			// @ts-ignore
 			this.addOperation(operation);

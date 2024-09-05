@@ -54,7 +54,8 @@ test('query param', () => {
 					},
 				},
 			],
-			default: 'List',
+			// eslint-disable-next-line
+			default: '',
 		},
 		{
 			displayName: 'GET /api/entities',
@@ -149,7 +150,8 @@ test('path param', () => {
 					},
 				},
 			],
-			default: 'Get',
+			// eslint-disable-next-line
+			default: '',
 		},
 		{
 			displayName: 'Entity',
@@ -254,7 +256,8 @@ test('request body', () => {
 					},
 				},
 			],
-			default: 'Create',
+			// eslint-disable-next-line
+			default: '',
 		},
 		{
 			displayName: 'Name',
@@ -381,7 +384,8 @@ test('enum schema', () => {
 					},
 				},
 			],
-			default: 'Create',
+			// eslint-disable-next-line
+			default: '',
 		},
 		{
 			displayName: 'Type',
