@@ -1,6 +1,6 @@
 # @devlikeapro/n8n-nodes-waha
 <p align="center">
-  <img src="./WAHA+n8n.png" style='border-radius: 50%' width='500'/>
+  <img src="https://github.com/devlikeapro/n8n-nodes-waha/blob/master/WAHA+n8n.png?raw=true" style='border-radius: 50%' width='400'/>
 </p>
 
 This is a n8n community node. 
