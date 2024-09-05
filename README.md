@@ -6,7 +6,7 @@
 This is a n8n community node. 
 It lets you use [WAHA - WhatsApp HTTP API](https://waha.devlike.pro) in your n8n workflows.
 
-**WAHA** - **WhatsApp API** that you can run in a click!
+[**WAHA**](https://waha.devlike.pro) - **WhatsApp API** that you can run in a click!
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
