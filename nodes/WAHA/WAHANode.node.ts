@@ -2,6 +2,42 @@ import {INodeProperties, INodeType, INodeTypeDescription} from 'n8n-workflow';
 import {TestDescription} from "./TestDescription";
 import * as doc from './openapi/openapi.json';
 import { Parser } from './openapi/parser';
+import {Pattern, update} from "./utils";
+
+const customDefaults: Pattern[]= [
+	{
+		find: {
+			name: "session",
+		},
+		replace: {
+			default: "={{ $json.session }}"
+		}
+	},
+	{
+		find: {
+			name: "chatId",
+		},
+		replace: {
+			default: "={{ $json.payload.from }}"
+		}
+	},
+	{
+		find: {
+			name: "messageId",
+		},
+		replace: {
+			default: "={{ $json.payload.id }}"
+		}
+	},
+	{
+		find: {
+			name: "reply_to",
+		},
+		replace: {
+			default: ""
+		}
+	},
+]
 
 export function parse(){
 // @ts-ignore
@@ -10,6 +46,7 @@ export function parse(){
 	const resourceNode = parser.resourceNode!!
 	const operations = parser.operations
 	const fields = parser.fields
+	update(customDefaults, fields)
 	return {resourceNode, operations, fields}
 }
 const {resourceNode, operations, fields} = parse()
