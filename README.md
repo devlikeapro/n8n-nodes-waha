@@ -1,5 +1,7 @@
 # @devlikeapro/n8n-nodes-waha
-![](./WAHA+n8n.png)
+<p align="center">
+  <img src="./WAHA+n8n.png" style='border-radius: 50%' width='500'/>
+</p>
 
 This is a n8n community node. 
 It lets you use [WAHA - WhatsApp HTTP API](https://waha.devlike.pro) in your n8n workflows.
