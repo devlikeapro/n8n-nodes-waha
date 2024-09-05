@@ -52,7 +52,11 @@ You can check the workflows and how to use WAHA n8n Nodes
 2. **Add workflow** there (just empty one)
 3. Import one of the examples below by clicking on three dots **...** at the right top corner 
 of the n8n window and selecting **Import from URL**.
-4. Paste the url
+4. Paste the url to import workflow
+5. Select credentials for all WAHA nodes
+6. Configure you session to send event to **WAHA Trigger** Webhook URL
+7. Activate the workflow
+8. Enjoy low-code automation!
 
 
 ## Workflow Examples
