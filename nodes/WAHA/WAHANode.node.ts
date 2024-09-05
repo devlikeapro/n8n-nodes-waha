@@ -3,12 +3,16 @@ import {TestDescription} from "./TestDescription";
 import * as doc from './openapi/openapi.json';
 import { Parser } from './openapi/parser';
 
+export function parse(){
 // @ts-ignore
-const parser = new Parser(doc);
-parser.process()
-const resourceNode = parser.resourceNode!!
-const operations = parser.operations
-const fields = parser.fields
+	const parser = new Parser(doc);
+	parser.process()
+	const resourceNode = parser.resourceNode!!
+	const operations = parser.operations
+	const fields = parser.fields
+	return {resourceNode, operations, fields}
+}
+const {resourceNode, operations, fields} = parse()
 const additionalOperations: INodeProperties[] = []
 
 // Include test operations

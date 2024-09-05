@@ -1,14 +1,9 @@
-import * as doc from './openapi/openapi.json';
-import { Parser } from './openapi/parser';
+import { parse } from './WAHANode.node'
 
 
 test('OpenAPIParser', () => {
 // @ts-ignore
-	const parser = new Parser(doc);
-	parser.process()
-	const resourceNode = parser.resourceNode!!
-	const operations = parser.operations
-	const fields = parser.fields
+	const {resourceNode, operations, fields} = parse()
 	expect(resourceNode).toBeDefined()
 	expect(operations).toBeDefined()
 	expect(fields).toBeDefined()
