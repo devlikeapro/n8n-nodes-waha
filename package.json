@@ -1,6 +1,6 @@
 {
 	"name": "@devlikeapro/n8n-nodes-waha",
-	"version": "2024.9.2",
+	"version": "2024.9.3",
 	"description": "n8n to connect with WAHA (Whatsapp HTTP API)",
 	"keywords": [
 		"n8n-community-node-package"
