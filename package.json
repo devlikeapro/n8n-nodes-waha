@@ -1,5 +1,5 @@
 {
-	"name": "n8n-nodes-waha",
+	"name": "@devlikepro/n8n-nodes-waha",
 	"version": "2024.9.1",
 	"description": "n8n to connect with WAHA (Whatsapp HTTP API)",
 	"keywords": [
