@@ -50,7 +50,7 @@ If it doesn't allow you to **Save** it (no save button) - just put any string in
 You can check the workflows and how to use WAHA n8n Nodes
 1. Go to your n8n installation with installed **WAHA** node.
 2. **Add workflow** there (just empty one)
-3. Import one of the examples below by clicking on three dots **...** at the right top corner 
+3. Import one of the [**examples**](./n8n-workflows) by clicking on three dots **...** at the right top corner 
 of the n8n window and selecting **Import from URL**.
 4. Paste the url to import workflow
 5. Select credentials for all WAHA nodes
@@ -60,13 +60,4 @@ of the n8n window and selecting **Import from URL**.
 
 
 ## Workflow Examples
-[WAHA - Workflow Example](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Workflow_Examples.json) 
-- Mark message as seen
-- Send "pong" on "Ping"
-- Send image on "Image"
-- Send video on "Video"
-- Send all text messages to email
-
-[WAHA - Restart Server At Midnight](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Restart_Server_At_Midnight.json)
-- Restart WAHA server at midnight
-
+Check out [**n8n-workflows**](./n8n-workflows) folder
