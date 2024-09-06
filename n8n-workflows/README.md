@@ -15,6 +15,6 @@ You can import the workflows:
 
 Checkout folders for more templates!
 
-- [Chatting Template](./chatting-template)
-- [Send QR code to Email](./send-qr-code-to-email)
+- [Chatting Template](./chatting-template) - Simple chatting template that replies with "pong" if received "ping" and sends an image if received "image".
+- [Send QR code to Email](./send-qr-code-to-email) - Send QR code to the email when session it's in `SCAN_QR_CODE` status.
 - [Restart server at midnight](./restart-server-at-midnight)
