@@ -2,7 +2,7 @@
 You can import the workflows:
 1. Go to your n8n installation with installed **WAHA** node.
 2. **Add workflow** there (just empty one)
-3. Import one of the [**examples**](./n8n-workflows) by clicking on three dots **...** at the right top corner
+3. Import one of the [**examples**](#examples) by clicking on three dots **...** at the right top corner
 	 of the n8n window and selecting **Import from URL**.
 4. Paste the url to import workflow
 5. Select credentials for all WAHA nodes
