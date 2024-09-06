@@ -8,6 +8,7 @@ import type {
 } from 'n8n-workflow';
 
 import * as doc from './v202409/openapi.json';
+import {BASE_TRIGGER_DESCRIPTION} from "./base/description";
 
 function getEvents() {
 	const schemas = doc.components.schemas;
@@ -39,12 +40,8 @@ function note(): string {
 
 export class WAHATrigger implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'WAHA Trigger',
-		name: 'wahaTrigger',
-		icon: 'file:waha.svg',
-		group: ['trigger'],
+		...BASE_TRIGGER_DESCRIPTION,
 		version: 1,
-		description: 'Handle WAHA events via webhooks',
 		defaults: {
 			name: 'WAHA Trigger',
 		},
