@@ -60,4 +60,4 @@ of the n8n window and selecting **Import from URL**.
 
 
 ## Workflow Examples
-Check out [**n8n-workflows**](./n8n-workflows) folder
+👉 Check out [**n8n-workflows**](./n8n-workflows) folder for examples.
