@@ -184,7 +184,7 @@
       "id": "be4379fb-bbd6-44bb-8b8a-426666d959d4",
       "name": "WAHA Trigger",
       "type": "@devlikeapro/n8n-nodes-waha.wahaTrigger",
-      "typeVersion": 1,
+			"typeVersion": 202409,
       "position": [
         920,
         1000
