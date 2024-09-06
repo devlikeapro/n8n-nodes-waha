@@ -8,10 +8,3 @@ export const BASE_DESCRIPTION: INodeTypeBaseDescription = {
 	group: ['transform'],
 };
 
-export const BASE_TRIGGER_DESCRIPTION: INodeTypeBaseDescription = {
-	displayName: 'WAHA Trigger',
-	name: 'wahaTrigger',
-	icon: 'file:waha.svg',
-	group: ['trigger'],
-	description: 'Handle WAHA events via webhooks',
-};

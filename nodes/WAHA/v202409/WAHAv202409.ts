@@ -2,7 +2,7 @@ import {INodeType, INodeTypeDescription} from 'n8n-workflow';
 import * as doc from './openapi.json'
 import { Parser } from '../openapi/parser';
 import {Pattern, update} from "../utils";
-import {BASE_DESCRIPTION} from "../base/description";
+import {BASE_DESCRIPTION} from "../base/node";
 
 const customDefaults: Pattern[]= [
 	{
