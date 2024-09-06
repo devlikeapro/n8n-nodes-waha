@@ -24,7 +24,9 @@ It lets you use [WAHA - WhatsApp HTTP API](https://waha.devlike.pro) in your n8n
 ## Installation
 
 ### Install WAHA
-Make sure you have WAHA up and running. If not - follow 
+Make sure you have WAHA up and running. 
+
+If not - follow 
 [**⚡ Quick Start**](https://waha.devlike.pro/docs/overview/quick-start/)
 so you have WAHA available on http://localhost:3000/
 

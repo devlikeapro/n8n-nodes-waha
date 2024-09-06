@@ -13,16 +13,20 @@ You can import the workflows:
 ## Examples
 
 ### Chatting Workflow Examples
-[WAHA - Workflow Examples](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Workflow_Examples.json)
+[Chatting Workflow Examples](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Workflow_Examples.json)
 
-![](workflow-examples.png)
-- Mark message as seen
-- Send "pong" on "Ping"
-- Send image on "Image"
-- Send video on "Video"
-- Send all text messages to email
+![](WAHA___Workflow_Examples.png)
+A simple template that demonstrates how to use WAHA nodes to chat with your WhatsApp number.
+- Send QR code to Email
+- Mark message as seen when received
+- Send "pong" text on "Ping" message
+- Send an image on "Image" message
+- Send video on "Video" message
+- Send WhatsApp incoming message to Email
 
 ### Restart Server At Midnight
 [WAHA - Restart Server At Midnight](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Restart_Server_At_Midnight.json)
-- Restart WAHA server at midnight
+![](WAHA___Restart_Server_At_Midnight.png)
+
+Simple template to restart your server at midnight.
 
