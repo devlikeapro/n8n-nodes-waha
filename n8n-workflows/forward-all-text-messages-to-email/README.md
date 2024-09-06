@@ -1,12 +1,12 @@
-# Send QR code for authorization to Email
+# Forward all text messages to email
 [Template](./template.json)
 
 ![](workflow.png)
 
-Send QR code to the email when session it's in `SCAN_QR_CODE` status.
+Receive and forward all text messages to the email.
 
 ### How it works
-When session status is `SCAN_QR_CODE` - it fetches the QR code and sends it to the Email.
+Receive all text messages and forward them to the email.
 
 ### Set up steps
 - **Copy** template and **Paste** in n8n (Ctrl+V), or **Import From URL** (remember to get **Raw** link from GitHub in [template](./template.json))
@@ -14,5 +14,6 @@ When session status is `SCAN_QR_CODE` - it fetches the QR code and sends it to t
 - Configure **Email** node with your **from** and **to** email (requires **SMTP credentials** as well)
 - **Active** your workflow in n8n
 - Get **Webhook URL** (production one) from **WAHA Trigger** node
-- Start a new session with **Webhook URL** configured for `session.status` event
-- and see the QR code in your email!
+- Configure you **WAHA session** to send webhooks with `message` type to the **Webhook URL**
+- Send any message
+- and see the message in your email!
