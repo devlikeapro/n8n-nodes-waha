@@ -18,6 +18,7 @@ You can import the workflows:
 [Chatting Workflow Examples](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Workflow_Examples.json)
 
 ![](WAHA___Workflow_Examples.png)
+
 A simple template that demonstrates how to use WAHA nodes to chat with your WhatsApp number.
 - Send QR code to Email
 - Mark message as seen when received
@@ -28,6 +29,7 @@ A simple template that demonstrates how to use WAHA nodes to chat with your What
 
 ### Restart Server At Midnight
 [WAHA - Restart Server At Midnight](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Restart_Server_At_Midnight.json)
+
 ![](WAHA___Restart_Server_At_Midnight.png)
 
 Simple template to restart your server at midnight.
