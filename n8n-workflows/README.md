@@ -11,6 +11,8 @@ You can import the workflows:
 8. Enjoy low-code automation!
 
 ## Examples
+- [Chatting Workflow Examples](#chatting-workflow-examples)
+- [Restart Server At Midnight](#restart-server-at-midnight)
 
 ### Chatting Workflow Examples
 [Chatting Workflow Examples](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Workflow_Examples.json)
