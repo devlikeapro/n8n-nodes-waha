@@ -44,7 +44,7 @@ const parser = new Parser(doc);
 parser.process()
 update(customDefaults, parser.fields)
 
-export class WAHANodeV202409 implements INodeType {
+export class WAHAv202409 implements INodeType {
 	description: INodeTypeDescription = {
 		...BASE_DESCRIPTION,
 		version: 20249,

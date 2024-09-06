@@ -1,7 +1,7 @@
-import { WAHANodeV202409 } from './WAHANodeV202409';
+import { WAHAv202409 } from './WAHAv202409';
 
-test('WAHANodeV202409.description.properties', () => {
-	const node = new WAHANodeV202409();
+test('WAHAv202409.description.properties', () => {
+	const node = new WAHAv202409();
 	const expected = [
 		{
 			default: '',

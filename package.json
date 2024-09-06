@@ -34,7 +34,7 @@
 			"dist/credentials/WAHAApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/WAHA/WAHANode.node.js",
+			"dist/nodes/WAHA/WAHA.node.js",
       "dist/nodes/WAHA/WAHATrigger.node.js"
 		]
 	},
