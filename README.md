@@ -11,13 +11,17 @@ It lets you use [WAHA - WhatsApp HTTP API](https://waha.devlike.pro) in your n8n
 
 ![NPM Version](https://img.shields.io/npm/v/%40devlikeapro%2Fn8n-nodes-waha)
 
+<!-- toc -->
+
 - [Installation](#installation)
-  - [Install WAHA](#install-waha)
-  - [Install n8n](#install-n8n)
-  - [Install WAHA node](#install-waha-node)
+  * [Install WAHA](#install-waha)
+  * [Install n8n](#install-n8n)
+  * [Install WAHA node](#install-waha-node)
 - [Credentials](#credentials)
 - [Usage](#usage)
 - [Workflow Examples](#workflow-examples)
+
+<!-- tocstop -->
 
 ![WAHA Workflow Example Screenshot](./waha-n8n-workflow-example.png)
 

@@ -10,27 +10,32 @@ You can import the workflows:
 7. Activate the workflow
 8. Enjoy low-code automation!
 
-## Examples
-- [Chatting Workflow Examples](#chatting-workflow-examples)
-- [Restart Server At Midnight](#restart-server-at-midnight)
 
-### Chatting Workflow Examples
-[Template](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Workflow_Examples.json)
+# Workflows Templates
 
-![](WAHA___Workflow_Examples.png)
+<!-- toc -->
 
-A simple template that demonstrates how to use WAHA nodes to chat with your WhatsApp number.
-- Send QR code to Email
-- Mark message as seen when received
-- Send "pong" text on "Ping" message
-- Send an image on "Image" message
-- Send video on "Video" message
-- Send WhatsApp incoming message to Email
+- [Chatting Template](#chatting-template)
+  * [How it works](#how-it-works)
+  * [Set up steps](#set-up-steps)
 
-### Restart Server At Midnight
-[Template](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Restart_Server_At_Midnight.json)
+<!-- tocstop -->
 
-![](WAHA___Restart_Server_At_Midnight.png)
+## Chatting Template
+[Template](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Chatting_Template.json)
+![](WAHA___Chatting_Template.png)
 
-Simple template to restart your server at midnight.
+Simple chatting template that replies with "pong" if received "ping" and sends an image if received "image".
 
+### How it works
+When receive a new message on WhatsApp session - **send seen** always and based on message:
+- **Send back "pong"** if message is **"ping"**
+- **Send back an image** if message is **"image"**
+
+### Set up steps
+- **Import from URL** template
+- Configure **WAHA API** credentials and select it for all WAHA nodes
+- Get **Webhook URL** (production one) from **WAHA Trigger** node
+- Configure you **WAHA session** to send webhooks with `message` type to the **Webhook URL**
+- **Active** your workflow in n8n
+- Send "image" or "ping" to the WhatsApp account from another one and see the magic!
