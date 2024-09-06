@@ -11,6 +11,5 @@ WAHA API and docker container stops and then starts again.
 ### Set up steps
 - **Import from URL** template
 - Configure **WAHA API** credentials and select it for all WAHA nodes
-- Configure **Email** node with your **from** and **to** email (requires **SMTP credentials** as well)
 - **Active** your workflow in n8n
 - Enjoy the automation! 
