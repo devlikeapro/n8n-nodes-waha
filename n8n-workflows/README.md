@@ -17,3 +17,4 @@ Checkout folders for more templates!
 
 - [Chatting Template](./chatting-template)
 - [Send QR code to Email](./send-qr-code-to-email)
+- [Restart server at midnight](./restart-server-at-midnight)
