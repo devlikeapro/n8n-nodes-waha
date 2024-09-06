@@ -47,7 +47,7 @@ update(customDefaults, parser.fields)
 export class WAHAv202409 implements INodeType {
 	description: INodeTypeDescription = {
 		...BASE_DESCRIPTION,
-		version: 20249,
+		version: 202409,
 		subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
 		inputs: ['main'],
 		outputs: ['main'],

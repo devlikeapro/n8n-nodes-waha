@@ -27,7 +27,7 @@
       "id": "7dfc2ab0-e9dc-4db0-9dc6-5c5454fb7605",
       "name": "Restart WAHA",
       "type": "@devlikeapro/n8n-nodes-waha.WAHA",
-      "typeVersion": 2,
+      "typeVersion": 202409,
       "position": [
         1000,
         400

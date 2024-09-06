@@ -423,7 +423,7 @@
       "id": "5ee4c861-fdb9-4ccf-b5a8-18e10e70b31d",
       "name": "Send \"pong\"",
       "type": "@devlikeapro/n8n-nodes-waha.WAHA",
-      "typeVersion": 2,
+      "typeVersion": 202409,
       "position": [
         1800,
         1560
@@ -445,7 +445,7 @@
       "id": "b804af78-6ea2-4a88-b893-9d5de8c51ce6",
       "name": "Send Seen",
       "type": "@devlikeapro/n8n-nodes-waha.WAHA",
-      "typeVersion": 2,
+      "typeVersion": 202409,
       "position": [
         1720,
         1220
@@ -753,7 +753,7 @@
       "id": "471c365a-c50e-464a-9df1-80604b16ecc6",
       "name": "Get QR",
       "type": "@devlikeapro/n8n-nodes-waha.WAHA",
-      "typeVersion": 2,
+      "typeVersion": 202409,
       "position": [
         1880,
         720
@@ -775,7 +775,7 @@
       "id": "9e7cf9ed-0578-4301-a7d6-4fe93bddd1f3",
       "name": "Send Image",
       "type": "@devlikeapro/n8n-nodes-waha.WAHA",
-      "typeVersion": 2,
+      "typeVersion": 202409,
       "position": [
         1800,
         2000
