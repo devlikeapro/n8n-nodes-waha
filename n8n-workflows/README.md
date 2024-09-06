@@ -17,4 +17,7 @@ You can import the workflows:
 
 - [Chatting Template](./chatting-template) - Simple chatting template that replies with "pong" if received "ping" and sends an image if received "image".
 - [Send QR code to Email](./send-qr-code-to-email) - Send QR code to the email when session it's in `SCAN_QR_CODE` status.
+- [Forward all text messages to email](./forward-all-text-messages-to-email)
+- [Send Custom HTTP Request to WAHA API](./send-custom-http-request-to-waha)
 - [Restart server at midnight](./restart-server-at-midnight)
+- [WAHA Trigger Explanation](./waha-trigger-explanation)
