@@ -15,7 +15,7 @@ You can import the workflows:
 - [Restart Server At Midnight](#restart-server-at-midnight)
 
 ### Chatting Workflow Examples
-[Chatting Workflow Examples](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Workflow_Examples.json)
+[Template](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Workflow_Examples.json)
 
 ![](WAHA___Workflow_Examples.png)
 
@@ -28,7 +28,7 @@ A simple template that demonstrates how to use WAHA nodes to chat with your What
 - Send WhatsApp incoming message to Email
 
 ### Restart Server At Midnight
-[WAHA - Restart Server At Midnight](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Restart_Server_At_Midnight.json)
+[Template](https://raw.githubusercontent.com/devlikeapro/n8n-nodes-waha/master/n8n-workflows/WAHA___Restart_Server_At_Midnight.json)
 
 ![](WAHA___Restart_Server_At_Midnight.png)
 
