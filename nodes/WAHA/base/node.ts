@@ -8,3 +8,25 @@ export const BASE_DESCRIPTION: INodeTypeBaseDescription = {
 	group: ['transform'],
 };
 
+
+export const NODE_DESCRIPTION = {
+	subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
+	inputs: ['main'],
+	outputs: ['main'],
+	defaults: {
+		name: 'WAHA',
+	},
+	credentials: [
+		{
+			name: 'wahaApi',
+			required: true,
+		},
+	],
+	requestDefaults: {
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		baseURL: '={{$credentials.url}}',
+	},
+}
