@@ -1,103 +1,21 @@
-import {INodeProperties, INodeType, INodeTypeDescription} from 'n8n-workflow';
-import {TestDescription} from "./TestDescription";
-import * as doc from './openapi/openapi.json';
-import { Parser } from './openapi/parser';
-import {Pattern, update} from "./utils";
+import type { INodeTypeBaseDescription, IVersionedNodeType } from 'n8n-workflow';
+import { VersionedNodeType } from 'n8n-workflow';
+import { WAHANodeV202409 } from './v202409/WAHANodeV202409';
+import { WAHANodeV2 } from './v2/WAHANodeV2';
+import {BASE_DESCRIPTION} from "./base/description";
 
-const customDefaults: Pattern[]= [
-	{
-		find: {
-			name: "session",
-		},
-		replace: {
-			default: "={{ $json.session }}"
-		}
-	},
-	{
-		find: {
-			name: "chatId",
-		},
-		replace: {
-			default: "={{ $json.payload.from }}"
-		}
-	},
-	{
-		find: {
-			name: "messageId",
-		},
-		replace: {
-			default: "={{ $json.payload.id }}"
-		}
-	},
-	{
-		find: {
-			name: "reply_to",
-		},
-		replace: {
-			default: ""
-		}
-	},
-]
+export class WAHANode extends VersionedNodeType {
+	constructor() {
+		const nodeVersions: IVersionedNodeType['nodeVersions'] = {
+			2: WAHANodeV2(),
+			202409: new WAHANodeV202409(),
+		};
 
-export function parse(){
-// @ts-ignore
-	const parser = new Parser(doc);
-	parser.process()
-	const resourceNode = parser.resourceNode!!
-	const operations = parser.operations
-	const fields = parser.fields
-	update(customDefaults, fields)
-	return {resourceNode, operations, fields}
-}
-const {resourceNode, operations, fields} = parse()
-const additionalOperations: INodeProperties[] = []
+		const baseDescription: INodeTypeBaseDescription = {
+			...BASE_DESCRIPTION,
+			defaultVersion: 202409,
+		};
 
-// Include test operations
-const includeTest = process.env.N8N_WAHA_MODE === "dev"
-if (includeTest){
-	const testOption = {
-		name: "🐛 Test",
-		value: "Test",
-		description: "Just for playing around with n8n",
+		super(nodeVersions, baseDescription);
 	}
-	resourceNode.default = "Test"
-	// insert at the start
-	resourceNode.options!!.unshift(testOption)
-	additionalOperations.push(...TestDescription)
-}
-
-export class WAHANode implements INodeType {
-	description: INodeTypeDescription = {
-		name: 'WAHANode',
-		displayName: 'WAHA',
-		icon: 'file:waha.svg',
-		version: 2,
-		description: 'Connect with Whatsapp HTTP API',
-		subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
-		inputs: ['main'],
-		outputs: ['main'],
-		group: ['whatsapp'],
-		defaults: {
-			name: 'WAHA',
-		},
-		credentials: [
-			{
-				name: 'wahaApi',
-				required: true,
-			},
-		],
-		requestDefaults: {
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			baseURL: '={{$credentials.url}}',
-		},
-		properties: [
-			resourceNode,
-			...additionalOperations,
-			...operations,
-			...fields,
-		],
-	};
 }

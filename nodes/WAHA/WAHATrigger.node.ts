@@ -7,7 +7,7 @@ import type {
 	IWebhookResponseData,
 } from 'n8n-workflow';
 
-import * as doc from './openapi/openapi.json';
+import * as doc from './v202409/openapi.json';
 
 function getEvents() {
 	const schemas = doc.components.schemas;

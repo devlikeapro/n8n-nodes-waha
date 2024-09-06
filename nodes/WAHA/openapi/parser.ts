@@ -52,6 +52,13 @@ export class Parser {
 		this.fields = [];
 	}
 
+	get properties(): INodeProperties[] {
+		if (!this.resourceNode) {
+			throw new Error('Resource node not found');
+		}
+		return [this.resourceNode, ...this.operations, ...this.fields];
+	}
+
 	private get paths(): OpenAPIV3.PathsObject {
 		return this.doc.paths;
 	}
@@ -83,7 +90,7 @@ export class Parser {
 				},
 			},
 			options: options,
-			default: "",
+			default: '',
 		};
 
 		return [operations, ...fieldNodes] as INodeProperties[];
@@ -382,7 +389,7 @@ export class Parser {
 					},
 				},
 				options: options,
-				default: "",
+				default: '',
 			};
 			// @ts-ignore
 			this.addOperation(operation);
