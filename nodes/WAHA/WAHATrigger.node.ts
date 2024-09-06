@@ -1,105 +1,19 @@
-import type {
-	IDataObject,
-	INodeExecutionData,
-	INodeType,
-	INodeTypeDescription,
-	IWebhookFunctions,
-	IWebhookResponseData,
-} from 'n8n-workflow';
+import type { INodeTypeBaseDescription, IVersionedNodeType } from 'n8n-workflow';
+import { VersionedNodeType } from 'n8n-workflow';
+import {BASE_TRIGGER_DESCRIPTION} from "./base/trigger";
+import {WAHATriggerV202409} from "./v202409/WAHATriggerV202409";
 
-import * as doc from './v202409/openapi.json';
-import {BASE_TRIGGER_DESCRIPTION} from "./base/description";
-
-function getEvents() {
-	const schemas = doc.components.schemas;
-	const schema = schemas.WAHAWebhookSessionStatus;
-	const event = schema.properties.event;
-	return event.enum;
-}
-
-const events = getEvents()
-const options = events.map((event) => {
-	return {
-		name: event,
-		value: event,
-	};
-});
-const outputs = options.map((_) => 'main');
-const outputNames = options.map((option) => option.value);
-
-/**
- * Construct html ul li
- */
-function note(): string {
-	const parts = ["<b>Events</b>:"]
-	for (const event of events) {
-		parts.push(`- ${event}`)
-	}
-	return parts.join("<br>")
-}
-
-export class WAHATrigger implements INodeType {
-	description: INodeTypeDescription = {
-		...BASE_TRIGGER_DESCRIPTION,
-		version: 1,
-		defaults: {
-			name: 'WAHA Trigger',
-		},
-		inputs: [],
-		outputs: outputs,
-		outputNames: outputNames,
-		credentials: [],
-		webhooks: [
-			{
-				name: 'default',
-				httpMethod: 'POST',
-				responseMode: 'onReceived',
-				path: 'waha',
-			},
-		],
-		properties: [
-			{
-				displayName: "Remember to configure WAHA instance (session or server) to send events to <b>Webhook URL</b>. " +
-					"<br/>Check <b>Docs</b> link above☝️",
-				name: 'operation',
-				type: 'notice',
-				typeOptions: {
-					theme: 'info',
-				},
-				default: '',
-			},
-		{
-			displayName: note(),
-			name: 'operation',
-			type: 'notice',
-			typeOptions: {
-				theme: 'info',
-			},
-			default: '',
-		}
-		]
-	};
-
-	async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
-		const bodyData = this.getBodyData();
-
-		const eventType = bodyData.event as string | undefined;
-
-		if (eventType === undefined || !events.includes(eventType)) {
-			// If not eventType is defined or when one is defined, but we are not
-			// listening to it do not start the workflow.
-			return {};
-		}
-		const eventIndex: number = events.indexOf(eventType);
-		const req = this.getRequestObject();
-
-		const data = this.helpers.returnJsonArray(req.body as IDataObject);
-		const empty: INodeExecutionData[] = [];
-		const workflowData = events.map((_) => empty);
-		workflowData[eventIndex] = data;
-
-		return {
-			workflowData: workflowData,
+export class WAHATrigger extends VersionedNodeType {
+	constructor() {
+		const baseDescription: INodeTypeBaseDescription = {
+			...BASE_TRIGGER_DESCRIPTION,
+			defaultVersion: 202409,
 		};
+
+		const nodeVersions: IVersionedNodeType['nodeVersions'] = {
+			202409: new WAHATriggerV202409(),
+		};
+
+		super(nodeVersions, baseDescription);
 	}
 }
