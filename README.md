@@ -56,7 +56,7 @@ If it doesn't allow you to **Save** it (no save button) - just put any string in
 You can check the workflows and how to use WAHA n8n Nodes
 1. Go to your n8n installation with installed **WAHA** node.
 2. **Add workflow** there (just empty one)
-3. Import one of the [**examples**](./n8n-workflows) by clicking on three dots **...** at the right top corner 
+3. Import one of the [**examples**](http://waha-n8n-templates.devlike.pro/) by clicking on three dots **...** at the right top corner 
 of the n8n window and selecting **Import from URL**.
 4. Paste the url to import workflow
 5. Select credentials for all WAHA nodes
@@ -66,4 +66,4 @@ of the n8n window and selecting **Import from URL**.
 
 
 ## Workflow Examples
-👉 Check out [**n8n-workflows**](./n8n-workflows) folder for examples.
+👉 Check out [**n8n-workflows**](http://waha-n8n-templates.devlike.pro/) folder for examples.

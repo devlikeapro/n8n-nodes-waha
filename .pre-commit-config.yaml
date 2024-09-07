@@ -7,5 +7,4 @@ repos:
         files:
           (?x)^(
           README.md$|
-          n8n-workflows/README.md$|
           )$
