@@ -34,8 +34,8 @@ If you need help with that, check the
 
 ## Links
 - [**WAHA + n8n: No Code Low Code WhatsApp Automation Step-By-Step Guide**](http://localhost:1313/blog/waha-n8n/#install-waha-n8n-node)
-- [🧩 WAHA + n8n Integration](https://waha.devlike.pro/docs/integrations/n8n/)
-- [WAHA n8n Workflow Templates](http://waha-n8n-templates.devlike.pro/)
+- [**🧩 WAHA + n8n Integration**](https://waha.devlike.pro/docs/integrations/n8n/)
+- [**WAHA n8n Workflow Templates**](http://waha-n8n-templates.devlike.pro/)
 
 ## Workflow Examples
 👉 Check out [**n8n-workflows**](http://waha-n8n-templates.devlike.pro/) folder for examples.
