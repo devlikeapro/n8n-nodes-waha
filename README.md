@@ -33,7 +33,7 @@ If you need help with that, check the
 [**Install community nodes**](https://docs.n8n.io/integrations/community-nodes/installation/gui-install/)
 
 ## Links
-- [**WAHA + n8n: No Code Low Code WhatsApp Automation Step-By-Step Guide**](http://localhost:1313/blog/waha-n8n/#install-waha-n8n-node)
+- [**WAHA + n8n: No Code Low Code WhatsApp Automation Step-By-Step Guide**](https://waha/devlike.pro/blog/waha-n8n/)
 - [**🧩 WAHA + n8n Integration**](https://waha.devlike.pro/docs/integrations/n8n/)
 - [**WAHA n8n Workflow Templates**](http://waha-n8n-templates.devlike.pro/)
 
