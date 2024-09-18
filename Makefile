@@ -7,10 +7,10 @@ link:
 	npm link
 
 start:
-	cd ~/.n8n/custom && npm link @devlikepro/n8n-nodes-waha && n8n start
+	cd ~/.n8n/custom && npm link @devlikeapro/n8n-nodes-waha && n8n start
 
 start-dev:
-	cd ~/.n8n/custom && npm link @devlikepro/n8n-nodes-waha && N8N_WAHA_MODE=dev n8n start
+	cd ~/.n8n/custom && npm link @devlikeapro/n8n-nodes-waha && N8N_WAHA_MODE=dev n8n start
 
 tests:
 	npm run test
