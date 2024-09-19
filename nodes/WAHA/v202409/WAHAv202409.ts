@@ -1,10 +1,12 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import * as doc from './openapi.json';
-import { Parser } from '../openapi/parser';
-import { Pattern, update } from '../utils';
 import { BASE_DESCRIPTION, NODE_DESCRIPTION } from '../base/node';
+import {WAHAOperationsCollector} from "../openapi/WAHAOperationsCollector";
+import { OpenAPIN8NParser, ParserConfig } from '@devlikeapro/n8n-openapi-node';
+import { Override } from '@devlikeapro/n8n-openapi-node';
 
-const customDefaults: Pattern[] = [
+
+const customDefaults: Override[] = [
 	{
 		find: {
 			name: 'session',
@@ -39,16 +41,19 @@ const customDefaults: Pattern[] = [
 	},
 ];
 
-// @ts-ignore
-const parser = new Parser(doc);
-parser.process();
-update(customDefaults, parser.fields);
+const config: ParserConfig = {
+	OperationsCollector: WAHAOperationsCollector as any,
+	overrides: customDefaults,
+}
+const parser = new OpenAPIN8NParser(doc, config);
+const result = parser.process()
 
 export class WAHAv202409 implements INodeType {
 	description: INodeTypeDescription = {
 		...BASE_DESCRIPTION,
 		...NODE_DESCRIPTION,
 		version: 202409,
-		properties: parser.properties,
+		// @ts-ignore
+		properties: result,
 	};
 }
