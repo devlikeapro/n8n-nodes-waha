@@ -10,6 +10,8 @@ const customDefaults: Override[] = [
 	{
 		find: {
 			name: 'session',
+			required: true,
+			type: 'string',
 		},
 		replace: {
 			default: '={{ $json.session }}',
@@ -18,6 +20,8 @@ const customDefaults: Override[] = [
 	{
 		find: {
 			name: 'chatId',
+			required: true,
+			type: "string",
 		},
 		replace: {
 			default: '={{ $json.payload.from }}',
@@ -26,6 +30,7 @@ const customDefaults: Override[] = [
 	{
 		find: {
 			name: 'messageId',
+			type: 'string',
 		},
 		replace: {
 			default: '={{ $json.payload.id }}',
@@ -34,6 +39,7 @@ const customDefaults: Override[] = [
 	{
 		find: {
 			name: 'reply_to',
+			type: 'string',
 		},
 		replace: {
 			default: '',
