@@ -46,7 +46,7 @@ const config: ParserConfig = {
 	overrides: customDefaults,
 }
 const parser = new OpenAPIN8NParser(doc, config);
-const result = parser.process()
+const properties = parser.process()
 
 export class WAHAv202409 implements INodeType {
 	description: INodeTypeDescription = {
@@ -54,6 +54,6 @@ export class WAHAv202409 implements INodeType {
 		...NODE_DESCRIPTION,
 		version: 202409,
 		// @ts-ignore
-		properties: result,
+		properties: properties,
 	};
 }
