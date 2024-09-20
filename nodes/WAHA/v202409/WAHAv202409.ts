@@ -2,7 +2,7 @@ import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import * as doc from './openapi.json';
 import { BASE_DESCRIPTION, NODE_DESCRIPTION } from '../base/node';
 import {WAHAOperationsCollector} from "../openapi/WAHAOperationsCollector";
-import { OpenAPIN8NParser, ParserConfig } from '@devlikeapro/n8n-openapi-node';
+import { N8NPropertiesBuilder, N8NPropertiesBuilderConfig } from '@devlikeapro/n8n-openapi-node';
 import { Override } from '@devlikeapro/n8n-openapi-node';
 
 
@@ -41,12 +41,12 @@ const customDefaults: Override[] = [
 	},
 ];
 
-const config: ParserConfig = {
+const config: N8NPropertiesBuilderConfig = {
 	OperationsCollector: WAHAOperationsCollector as any,
 	overrides: customDefaults,
 }
-const parser = new OpenAPIN8NParser(doc, config);
-const properties = parser.process()
+const parser = new N8NPropertiesBuilder(doc, config);
+const properties = parser.build()
 
 export class WAHAv202409 implements INodeType {
 	description: INodeTypeDescription = {
