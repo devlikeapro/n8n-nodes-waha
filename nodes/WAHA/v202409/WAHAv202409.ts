@@ -1,10 +1,14 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import * as doc from './openapi.json';
 import { BASE_DESCRIPTION, NODE_DESCRIPTION } from '../base/node';
-import {WAHAOperationsCollector} from "../openapi/WAHAOperationsCollector";
-import { N8NPropertiesBuilder, N8NPropertiesBuilderConfig } from '@devlikeapro/n8n-openapi-node';
-import { Override } from '@devlikeapro/n8n-openapi-node';
-
+import { WAHAOperationsCollector } from '../openapi/WAHAOperationsCollector';
+import {
+	N8NPropertiesBuilder,
+	N8NPropertiesBuilderConfig,
+	Override,
+} from '@devlikeapro/n8n-openapi-node';
+import {WAHAOperationParser} from "../openapi/WAHAOperationParser";
+import {WAHAResourceParser} from "../openapi/WAHAResourceParser";
 
 const customDefaults: Override[] = [
 	{
@@ -21,7 +25,7 @@ const customDefaults: Override[] = [
 		find: {
 			name: 'chatId',
 			required: true,
-			type: "string",
+			type: 'string',
 		},
 		replace: {
 			default: '={{ $json.payload.from }}',
@@ -49,10 +53,11 @@ const customDefaults: Override[] = [
 
 const config: N8NPropertiesBuilderConfig = {
 	OperationsCollector: WAHAOperationsCollector as any,
-	overrides: customDefaults,
-}
+	operation: new WAHAOperationParser(),
+	resource: new WAHAResourceParser(),
+};
 const parser = new N8NPropertiesBuilder(doc, config);
-const properties = parser.build()
+const properties = parser.build(customDefaults);
 
 export class WAHAv202409 implements INodeType {
 	description: INodeTypeDescription = {
