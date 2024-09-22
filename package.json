@@ -59,6 +59,7 @@
     "typescript": "~4.8.4"
   },
   "dependencies": {
+    "@devlikeapro/n8n-openapi-node": "^0.1.0",
     "lodash": "^4.17.21",
     "openapi-types": "^12.1.3",
     "pino": "^9.4.0"
