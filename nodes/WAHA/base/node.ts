@@ -1,7 +1,7 @@
 import {INodeTypeBaseDescription, NodeConnectionType} from "n8n-workflow";
 
 export const BASE_DESCRIPTION: INodeTypeBaseDescription = {
-	name: 'WAHA',
+	name: 'waha',
 	displayName: 'WAHA',
 	icon: 'file:waha.svg',
 	description: 'Connect with Whatsapp HTTP API',
@@ -14,7 +14,7 @@ export const NODE_DESCRIPTION = {
 	inputs: [NodeConnectionType.Main],
 	outputs: [NodeConnectionType.Main],
 	defaults: {
-		name: 'WAHA',
+		name: 'waha',
 	},
 	credentials: [
 		{
