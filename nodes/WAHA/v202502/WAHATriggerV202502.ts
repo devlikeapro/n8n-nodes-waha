@@ -1,26 +1,17 @@
 import {
 	INodeType,
-	INodeTypeDescription, NodeConnectionType,
+	INodeTypeDescription,
 } from 'n8n-workflow';
 
-import * as doc from './openapi.json';
 import {
 	BASE_TRIGGER_DESCRIPTION,
 	CONFIGURE_WEBHOOK_NOTE,
-	makeEventNote, makeWebhookForEvents,
+	makeWebhookForEvents,
 	TRIGGER_DESCRIPTION,
 } from '../base/trigger';
+import { configuredOutputs, events } from './utils';
 
-function getEvents() {
-	const schemas = doc.components.schemas;
-	const schema = schemas.WAHAWebhookSessionStatus;
-	const event = schema.properties.event;
-	return event.enum;
-}
-
-const events = getEvents();
-const outputs = events.map((_) => NodeConnectionType.Main);
-const outputNames = events;
+const defaultEvent = 'message'
 
 
 export class WAHATriggerV202502 implements INodeType {
@@ -28,9 +19,19 @@ export class WAHATriggerV202502 implements INodeType {
 		...BASE_TRIGGER_DESCRIPTION,
 		...TRIGGER_DESCRIPTION,
 		version: 202502,
-		outputs: outputs,
-		outputNames: outputNames,
-		properties: [CONFIGURE_WEBHOOK_NOTE, makeEventNote(events)],
+		outputs: `={{(${configuredOutputs})($parameter)}}`,
+		properties: [CONFIGURE_WEBHOOK_NOTE, {
+			displayName: 'Events',
+			name: 'listenEvents',
+			type: 'multiOptions',
+			options: [
+				...events.map(event => ({name: event, value: event})),
+			],
+			required: true,
+			default: [
+				defaultEvent
+			],
+		}],
 	};
 	webhook = makeWebhookForEvents(events)
 }
