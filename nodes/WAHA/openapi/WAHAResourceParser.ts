@@ -1,4 +1,4 @@
-import {OpenAPIV3} from 'openapi-types';
+import { OpenAPIV3 } from 'openapi-types';
 import * as lodash from 'lodash';
 import { DefaultResourceParser } from '@devlikeapro/n8n-openapi-node';
 

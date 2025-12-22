@@ -1,4 +1,4 @@
-import {INodeTypeBaseDescription, NodeConnectionType} from "n8n-workflow";
+import { INodeTypeBaseDescription, NodeConnectionType } from 'n8n-workflow';
 
 export const BASE_DESCRIPTION: INodeTypeBaseDescription = {
 	name: 'WAHA',
@@ -7,7 +7,6 @@ export const BASE_DESCRIPTION: INodeTypeBaseDescription = {
 	description: 'Connect with Whatsapp HTTP API',
 	group: ['transform'],
 };
-
 
 export const NODE_DESCRIPTION = {
 	subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
@@ -29,4 +28,4 @@ export const NODE_DESCRIPTION = {
 		},
 		baseURL: '={{$credentials.url}}',
 	},
-}
+};

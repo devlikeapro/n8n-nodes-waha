@@ -39,7 +39,32 @@
     ],
     "nodes": [
       "dist/nodes/WAHA/WAHA.node.js",
-      "dist/nodes/WAHA/WAHATrigger.node.js"
+      "dist/nodes/WAHA/WAHATrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHASessionStatusTrigger/WAHASessionStatusTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAMessageTrigger/WAHAMessageTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAMessageReactionTrigger/WAHAMessageReactionTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAMessageAnyTrigger/WAHAMessageAnyTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAMessageAckTrigger/WAHAMessageAckTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAMessageRevokedTrigger/WAHAMessageRevokedTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAGroupV2JoinTrigger/WAHAGroupV2JoinTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAGroupV2LeaveTrigger/WAHAGroupV2LeaveTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAGroupV2UpdateTrigger/WAHAGroupV2UpdateTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAGroupV2ParticipantsTrigger/WAHAGroupV2ParticipantsTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAPresenceUpdateTrigger/WAHAPresenceUpdateTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAPollVoteTrigger/WAHAPollVoteTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAPollVoteFailedTrigger/WAHAPollVoteFailedTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAChatArchiveTrigger/WAHAChatArchiveTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHACallReceivedTrigger/WAHACallReceivedTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHACallAcceptedTrigger/WAHACallAcceptedTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHACallRejectedTrigger/WAHACallRejectedTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHALabelUpsertTrigger/WAHALabelUpsertTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHALabelDeletedTrigger/WAHALabelDeletedTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHALabelChatAddedTrigger/WAHALabelChatAddedTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHALabelChatDeletedTrigger/WAHALabelChatDeletedTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAEngineEventTrigger/WAHAEngineEventTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAGroupJoinTrigger/WAHAGroupJoinTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAGroupLeaveTrigger/WAHAGroupLeaveTrigger.node.js",
+      "dist/nodes/WAHA/triggers/WAHAStateChangeTrigger/WAHAStateChangeTrigger.node.js"
     ]
   },
   "devDependencies": {

@@ -1,13 +1,11 @@
-import {
-	INodeType,
-	INodeTypeDescription, NodeConnectionType,
-} from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
 
 import * as doc from './openapi.json';
 import {
 	BASE_TRIGGER_DESCRIPTION,
 	CONFIGURE_WEBHOOK_NOTE,
-	makeEventNote, makeWebhookForEvents,
+	makeEventNote,
+	makeWebhookForEvents,
 	TRIGGER_DESCRIPTION,
 } from '../base/trigger';
 
@@ -22,7 +20,6 @@ const events = getEvents();
 const outputs = events.map((_) => NodeConnectionType.Main);
 const outputNames = events;
 
-
 export class WAHATriggerV202502 implements INodeType {
 	description: INodeTypeDescription = {
 		...BASE_TRIGGER_DESCRIPTION,
@@ -32,5 +29,5 @@ export class WAHATriggerV202502 implements INodeType {
 		outputNames: outputNames,
 		properties: [CONFIGURE_WEBHOOK_NOTE, makeEventNote(events)],
 	};
-	webhook = makeWebhookForEvents(events)
+	webhook = makeWebhookForEvents(events);
 }
