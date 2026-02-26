@@ -89,3 +89,29 @@ export function makeWebhookForEvents(events: string[]) {
 
 	return webhook;
 }
+
+export function makeWebhookForSelectedEvents() {
+	async function webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
+		const bodyData = this.getBodyData();
+		const eventType = bodyData.event as string | undefined;
+		const listenEvents = this.getNodeParameter('listenEvents') as string[];
+
+		if (eventType === undefined || !listenEvents.includes(eventType)) {
+			return {};
+		}
+
+		const eventIndex: number = listenEvents.indexOf(eventType);
+		const req = this.getRequestObject();
+
+		const data = this.helpers.returnJsonArray(req.body as IDataObject);
+		const empty: INodeExecutionData[] = [];
+		const workflowData = listenEvents.map((_) => empty);
+		workflowData[eventIndex] = data;
+
+		return {
+			workflowData: workflowData,
+		};
+	}
+
+	return webhook;
+}
