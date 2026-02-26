@@ -1,69 +1,7 @@
+import { configuredOutputs } from './utils';
 import { WAHATriggerV202602 } from './WAHATriggerV202602';
 
 test('WAHATriggerV202602.outputs', () => {
 	const node = new WAHATriggerV202602();
-	expect(node.description.outputs).toEqual([
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main",
-		"main"
-	] );
-	expect(node.description.outputNames).toEqual([
-		"session.status",
-		"message",
-		"message.reaction",
-		"message.any",
-		"message.ack",
-		"message.ack.group",
-		"message.waiting",
-		"message.revoked",
-		"message.edited",
-		"state.change",
-		"group.join",
-		"group.leave",
-		"group.v2.join",
-		"group.v2.leave",
-		"group.v2.update",
-		"group.v2.participants",
-		"presence.update",
-		"poll.vote",
-		"poll.vote.failed",
-		"chat.archive",
-		"call.received",
-		"call.accepted",
-		"call.rejected",
-		"label.upsert",
-		"label.deleted",
-		"label.chat.added",
-		"label.chat.deleted",
-		"event.response",
-		"event.response.failed",
-		"engine.event"
-	]);
+	expect(node.description.outputs).toEqual(`={{(${configuredOutputs})($parameter)}}`);
 });
